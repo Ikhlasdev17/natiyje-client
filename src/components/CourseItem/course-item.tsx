@@ -29,8 +29,8 @@ const CourseItem: FC<CourseItemProps> = () => {
 				src='https://picsum.photos/340/270'
 				width={'full'}
 				objectFit={'cover'}
-				height={'263px'}
-				borderRadius={'15px'}
+				height={'300px'}
+				borderRadius={'20px'}
 			/>
 			<Flex
 				p={3}
