@@ -1,5 +1,4 @@
-import { Flex, HStack, Text } from '@chakra-ui/react'
-import Image from 'next/image'
+import { Flex, HStack, Image, Text } from '@chakra-ui/react'
 
 const HomeBannerCards = () => {
 	return (
@@ -41,11 +40,11 @@ const HomeBannerCards = () => {
 			</HStack>
 			<HStack minW={'200px'} gap={3}>
 				<Image alt='' src='./home-icon2.svg' width={74} height={74} />
-				<Text fontSize={'lg'}>Siz qa'legen waqit</Text>
+				<Text fontSize={'lg'}>Siz qalegen waqit</Text>
 			</HStack>
 			<HStack minW={'200px'} gap={3}>
 				<Image alt='' src='./home-icon3.svg' width={74} height={74} />
-				<Text fontSize={'lg'}>Ku'shli bilim</Text>
+				<Text fontSize={'lg'}>Kushli bilim</Text>
 			</HStack>
 		</Flex>
 	)

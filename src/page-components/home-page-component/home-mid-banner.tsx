@@ -34,7 +34,7 @@ const HomeMidBanner = () => {
 							mb={'30px'}
 							fontWeight={'500'}
 						>
-							Na'tiyje platformasi sizge usinis etedi!
+							Natiyje platformasi sizge usinis etedi!
 						</Heading>
 						<Text color={'lightTextColor'} fontSize={'24px'} mb={'30px'}>
 							87% of people learning for professional development report career
@@ -54,7 +54,7 @@ const HomeMidBanner = () => {
 							</HStack>
 						</Stack>
 						<Box>
-							<Button colorScheme='brand'>Ha'ziraq baslaw</Button>
+							<Button colorScheme='brand'>Haziraq baslaw</Button>
 						</Box>
 					</Stack>
 					<Box

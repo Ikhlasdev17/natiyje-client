@@ -46,7 +46,7 @@ const HomeBanner = () => {
 					textShadow={'lg'}
 					mt={10}
 				>
-					Na'tiyje.uz - Siz ku'tkennende joqari na'tiyje ushin!
+					Natiyje.uz - Siz kutkennende joqari natiyje ushin!
 				</Heading>
 				<Text textShadow={'lg'} color={'white'} my={6} fontSize={'24px'}>
 					Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus
@@ -59,7 +59,7 @@ const HomeBanner = () => {
 					variant={'solid'}
 					colorScheme='brand'
 				>
-					Dizimnen o'tiw
+					Dizimnen otiw
 				</Button>
 				<HomeBannerCards />
 			</Box>

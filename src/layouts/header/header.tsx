@@ -66,7 +66,7 @@ const Header = ({ colorScheme, color, pos }: HeaderProps) => {
 					<Button color={textColor} variant={'link'}>
 						<Link href={'/'}>Kiriw</Link>
 					</Button>
-					<Button colorScheme='brand'>Dizimnen o'tiw</Button>
+					<Button colorScheme='brand'>Dizimnen otiw</Button>
 				</HStack>
 			</Box>
 		</Box>

@@ -9,9 +9,9 @@ const HomeCourses = () => {
 			<Container>
 				<>
 					<SectionTitle
-						extraEl={<Button colorScheme='brand'>Ba'rshe kurslar</Button>}
+						extraEl={<Button colorScheme='brand'>Barshe kurslar</Button>}
 					>
-						Qizig'iwshilig'in'izg'a mas kursti saylan'
+						Qizigiwshiliginizga mas kursti saylan
 					</SectionTitle>
 					<Grid
 						gridTemplateColumns={{
@@ -22,7 +22,7 @@ const HomeCourses = () => {
 						gap={'30px'}
 					>
 						{[1, 2, 3, 4, 5, 6].map(item => (
-							<GridItem>
+							<GridItem key={item}>
 								<CourseItem />
 							</GridItem>
 						))}

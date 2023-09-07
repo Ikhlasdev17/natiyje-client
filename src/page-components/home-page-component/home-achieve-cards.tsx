@@ -12,7 +12,7 @@ const HomeAchieveCards = () => {
 					fontWeight={'500'}
 					my={'40px'}
 				>
-					Nátiyje menen maqsetlerin'izge tezirek erisin'!
+					Nátiyje menen maqsetlerinizge tezirek erisin!
 				</Heading>
 
 				<Flex
