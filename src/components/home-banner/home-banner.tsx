@@ -3,7 +3,10 @@ import HomeBannerCards from './home-banner-card'
 const HomeBanner = () => {
 	return (
 		<Box
-			minH={'630px'}
+			minH={{
+				base: '730px',
+				md: '630px',
+			}}
 			w={'full'}
 			pos='relative'
 			display={'flex'}
@@ -12,6 +15,10 @@ const HomeBanner = () => {
 			flexDir={'column'}
 			textAlign={'center'}
 			px={6}
+			mb={{
+				base: '400px',
+				md: '150px',
+			}}
 		>
 			<Image
 				w={'full'}
@@ -31,7 +38,10 @@ const HomeBanner = () => {
 			<Box zIndex={'1'}>
 				<Heading
 					display={'flex'}
-					fontSize={'50px'}
+					fontSize={{
+						base: '40px',
+						md: '50px',
+					}}
 					color={'white'}
 					textShadow={'lg'}
 					mt={10}

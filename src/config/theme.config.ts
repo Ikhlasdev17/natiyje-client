@@ -15,5 +15,19 @@ export const theme = extendTheme({
 			200: '#f89792',
 			100: '#faaeaa',
 		},
+		textColor: '#302D3A',
+		lightTextColor: '#5F5982',
+	},
+	fonts: {
+		heading: `'Poppins', sans-serif`,
+		body: `'Poppins', sans-serif`,
+	},
+	breakpoints: {
+		base: '0px',
+		sm: '320px',
+		md: '768px',
+		lg: '1100px',
+		xl: '1200px',
+		'2xl': '1536px',
 	},
 })

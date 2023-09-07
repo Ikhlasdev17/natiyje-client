@@ -35,15 +35,15 @@ const HomeBannerCards = () => {
 				md: 'row',
 			}}
 		>
-			<HStack gap={3}>
+			<HStack minW={'200px'} gap={3}>
 				<Image alt='' src='./home-icon1.svg' width={74} height={74} />
 				<Text fontSize={'lg'}>10+ online kurslar</Text>
 			</HStack>
-			<HStack gap={3}>
+			<HStack minW={'200px'} gap={3}>
 				<Image alt='' src='./home-icon2.svg' width={74} height={74} />
 				<Text fontSize={'lg'}>Siz qa'legen waqit</Text>
 			</HStack>
-			<HStack gap={3}>
+			<HStack minW={'200px'} gap={3}>
 				<Image alt='' src='./home-icon3.svg' width={74} height={74} />
 				<Text fontSize={'lg'}>Ku'shli bilim</Text>
 			</HStack>
