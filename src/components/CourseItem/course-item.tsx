@@ -26,14 +26,14 @@ const CourseItem: FC<CourseItemProps> = () => {
 		>
 			<Image
 				p={4}
-				src='https://picsum.photos/340/270'
+				src='/nodejs.jpeg'
 				width={'full'}
 				objectFit={'cover'}
 				height={'300px'}
 				borderRadius={'20px'}
 			/>
 			<Flex
-				p={3}
+				p={4}
 				pt={0}
 				align={'center'}
 				justifyContent={'space-between'}
@@ -41,11 +41,11 @@ const CourseItem: FC<CourseItemProps> = () => {
 			>
 				<Flex align={'center'} gap={'10px'}>
 					<Icon as={AiOutlineStar} color={'gold'} fontSize={'18px'} />
-					<Text fontSize={'14px'}>4.5(120)</Text>
+					<Text fontSize={'16px'}>4.5(120)</Text>
 				</Flex>
 				<Flex align={'center'} gap={'10px'}>
 					<Icon as={AiOutlineEye} color={'red.400'} fontSize={'18px'} />
-					<Text fontSize={'14px'}>23.400</Text>
+					<Text fontSize={'16px'}>23.400</Text>
 				</Flex>
 				<Flex align={'center'} gap={'10px'}>
 					<Icon
@@ -53,13 +53,18 @@ const CourseItem: FC<CourseItemProps> = () => {
 						color={'green.400'}
 						fontSize={'18px'}
 					/>
-					<Text fontSize={'14px'}>44 sabaq</Text>
+					<Text fontSize={'16px'}>44 sabaq</Text>
 				</Flex>
 			</Flex>
 			<Divider color={'gray.100'} />
 			<Box p={4}>
-				<Heading fontSize={'20px'} fontWeight={'500'} color={'textColor'}>
-					Everything You Need to Know About Business
+				<Heading
+					fontSize={'24px'}
+					fontWeight={'500'}
+					mb={2}
+					color={'textColor'}
+				>
+					Node.js toliq kurs.
 				</Heading>
 				<Flex mt={'15px'} justify={'space-between'} alignItems={'center'}>
 					<HStack spacing={'14px'} align={'center'}>
