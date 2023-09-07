@@ -63,7 +63,11 @@ const Header = ({ colorScheme, color, pos }: HeaderProps) => {
 
 				<HStack gap={'35px'}>
 					{/* <Icon as={AiOutlineShoppingCart} /> */}
-					<Button color={textColor} variant={'link'}>
+					<Button
+						display={{ base: 'none', md: 'block' }}
+						color={textColor}
+						variant={'link'}
+					>
 						<Link href={'/'}>Kiriw</Link>
 					</Button>
 					<Button colorScheme='brand'>Dizimnen otiw</Button>

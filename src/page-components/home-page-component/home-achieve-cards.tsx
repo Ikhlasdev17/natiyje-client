@@ -1,11 +1,11 @@
 import { Container } from '@/components'
-import { Box, Flex, Heading, Text } from '@chakra-ui/react'
+import { Box, Flex, Heading, Stack, Text } from '@chakra-ui/react'
 import Image from 'next/image'
 
 const HomeAchieveCards = () => {
 	return (
 		<Container>
-			<Box my={'50px'}>
+			<Stack my={'50px'}>
 				<Heading
 					fontSize={'40px'}
 					textAlign={'center'}
@@ -23,6 +23,7 @@ const HomeAchieveCards = () => {
 						lg: 'nowrap',
 					}}
 					justifyContent={'center'}
+					mb={'40px'}
 				>
 					<Box
 						_hover={{ shadow: 'lg' }}
@@ -88,7 +89,7 @@ const HomeAchieveCards = () => {
 						</Text>
 					</Box>
 				</Flex>
-			</Box>
+			</Stack>
 		</Container>
 	)
 }
