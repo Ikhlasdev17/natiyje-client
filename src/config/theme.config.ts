@@ -1,6 +1,6 @@
-import { extendTheme } from '@chakra-ui/react'
+import { ThemeConfig, extendTheme } from '@chakra-ui/react'
 
-export const theme = extendTheme({
+export const theme: ThemeConfig = extendTheme({
 	config: {
 		initialColorMode: 'light',
 		useSystemColorMode: false,
@@ -24,7 +24,7 @@ export const theme = extendTheme({
 	},
 	breakpoints: {
 		base: '0px',
-		sm: '320px',
+		sm: '400px',
 		md: '768px',
 		lg: '1100px',
 		xl: '1200px',

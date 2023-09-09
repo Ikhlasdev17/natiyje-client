@@ -9,6 +9,7 @@ import {
 	Image,
 	Text,
 } from '@chakra-ui/react'
+import { useRouter } from 'next/router'
 import { FC } from 'react'
 import {
 	AiOutlineEye,
@@ -17,6 +18,7 @@ import {
 } from 'react-icons/ai'
 import { CourseItemProps } from './course-item.props'
 const CourseItem: FC<CourseItemProps> = () => {
+	const router = useRouter()
 	return (
 		<Card
 			shadow={'lg'}
@@ -25,6 +27,7 @@ const CourseItem: FC<CourseItemProps> = () => {
 			transition={'.3s ease'}
 		>
 			<Image
+				onClick={() => router.push(`/courses/node-js-course`)}
 				p={4}
 				src='/nodejs.jpeg'
 				width={'full'}

@@ -1,6 +1,8 @@
-import { Box, Button, Heading, Image, Text } from '@chakra-ui/react'
+import { Box, Button, Flex, Heading, Image, Text } from '@chakra-ui/react'
+import { useRouter } from 'next/router'
 import HomeBannerCards from './home-banner-card'
 const HomeBanner = () => {
+	const router = useRouter()
 	return (
 		<Box
 			minH={{
@@ -52,15 +54,32 @@ const HomeBanner = () => {
 					Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus
 					deserunt voluptas ut enim consectetur.
 				</Text>
-				<Button
-					px={6}
-					h={12}
-					display={'inline-block'}
-					variant={'solid'}
-					colorScheme='brand'
-				>
-					Dizimnen otiw
-				</Button>
+				<Flex gap={4} justifyContent={'center'}>
+					<Button
+						px={6}
+						h={12}
+						display={'inline-block'}
+						variant={'outline'}
+						colorScheme='gray'
+						_hover={{
+							background: 'rgba(0,0,0,.2)',
+						}}
+						color={'white'}
+						onClick={() => router.push('/courses')}
+					>
+						Kurslarimiz
+					</Button>
+					<Button
+						px={6}
+						h={12}
+						display={'inline-block'}
+						variant={'solid'}
+						colorScheme='brand'
+						onClick={() => router.push('/register')}
+					>
+						Dizimnen otiw
+					</Button>
+				</Flex>
 				<HomeBannerCards />
 			</Box>
 		</Box>

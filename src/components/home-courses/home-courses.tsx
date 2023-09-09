@@ -1,15 +1,24 @@
 import { Box, Button, Grid, GridItem } from '@chakra-ui/react'
+import { useRouter } from 'next/router'
 import CourseItem from '../CourseItem/course-item'
 import Container from '../container/container'
 import SectionTitle from '../section-title/section-title'
 
 const HomeCourses = () => {
+	const router = useRouter()
 	return (
 		<Box my={'40px'}>
 			<Container>
 				<>
 					<SectionTitle
-						extraEl={<Button colorScheme='brand'>Barshe kurslar</Button>}
+						extraEl={
+							<Button
+								onClick={() => router.push('/courses')}
+								colorScheme='brand'
+							>
+								Barshe kurslar
+							</Button>
+						}
 					>
 						Qizigiwshiliginizga mas kursti saylan
 					</SectionTitle>
