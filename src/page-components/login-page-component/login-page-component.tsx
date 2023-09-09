@@ -63,14 +63,14 @@ const LoginPageComponent = () => {
 						variant={'link'}
 						onClick={() => router.push('/login')}
 					>
-						Sizde a'lleqashan akkount barma?
+						Sizde alleqashan akkount barma?
 					</Button>
 					<Button
 						colorScheme='brand'
 						variant={'solid'}
 						onClick={() => router.push('/register')}
 					>
-						Dizimnen o'tiw
+						Dizimnen otiw
 					</Button>
 				</HStack>
 			</Flex>

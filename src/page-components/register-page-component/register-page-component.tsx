@@ -56,7 +56,7 @@ const RegisterPageComponent = () => {
 
 				<HStack spacing={'40px'}>
 					<Button variant={'link'} onClick={() => router.push('/login')}>
-						Sizde a'lleqashan akkount barma?
+						Sizde alleqashan akkount barma?
 					</Button>
 					<Button
 						display={{
@@ -66,7 +66,7 @@ const RegisterPageComponent = () => {
 						colorScheme='brand'
 						variant={'solid'}
 					>
-						Dizimnen o'tiw
+						Dizimnen otiw
 					</Button>
 				</HStack>
 			</Flex>
@@ -175,7 +175,7 @@ const RegisterPageComponent = () => {
 									variant={'link'}
 									onClick={() => router.push('/login')}
 								>
-									Sizde a'lleqashan akkount barma?
+									Sizde alleqashan akkount barma?
 								</Button>
 							</Stack>
 						</Form>
