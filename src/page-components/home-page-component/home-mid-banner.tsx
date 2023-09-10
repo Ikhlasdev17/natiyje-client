@@ -11,7 +11,7 @@ import {
 
 const HomeMidBanner = () => {
 	return (
-		<Box my={'40px'} py={'100px'} bg={'#DDF7FF'}>
+		<Box my={'40px'} py={'100px'} bg={'#fff'}>
 			<Box
 				w={{
 					base: '90%',
@@ -36,17 +36,15 @@ const HomeMidBanner = () => {
 						>
 							Natiyje platformasi sizge usinis etedi!
 						</Heading>
-						<Text color={'lightTextColor'} fontSize={'24px'} mb={'30px'}>
+						<Box color={'lightTextColor'} fontSize={'24px'} mb={'30px'}>
 							87% of people learning for professional development report career
 							benefits like getting a promotion, a raise, or starting a new
 							career
-						</Text>
+						</Box>
 						<Stack>
 							<HStack mb={'20px'}>
 								<Image src={'./check.svg'} width={30} height={30} alt='' />
-								<Text color={'textColor'}>
-									Top instructors from around world
-								</Text>
+								<Box color={'textColor'}>Top instructors from around world</Box>
 							</HStack>
 							<HStack mb={'20px'}>
 								<Image src={'./check.svg'} width={30} height={30} alt='' />

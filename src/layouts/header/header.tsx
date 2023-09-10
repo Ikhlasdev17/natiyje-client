@@ -1,12 +1,34 @@
 import { headerMenuItems } from '@/config/constants'
-import { Box, Button, Flex, HStack, Heading, Icon } from '@chakra-ui/react'
+import { useActions } from '@/hooks/useActions'
+import { useAuth } from '@/hooks/useAuth'
+import {
+	Box,
+	Button,
+	Flex,
+	HStack,
+	Heading,
+	Icon,
+	Image,
+	Menu,
+	MenuButton,
+	MenuItem,
+	MenuList,
+	Text,
+} from '@chakra-ui/react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
+import { AiOutlinePoweroff } from 'react-icons/ai'
+import { BiUserCircle } from 'react-icons/bi'
+import { BsChevronDown, BsGrid } from 'react-icons/bs'
+import { HiOutlineShieldCheck } from 'react-icons/hi2'
 import { RiMenu4Line } from 'react-icons/ri'
 import { HeaderProps } from './header.props'
 const Header = ({ colorScheme, color, pos }: HeaderProps) => {
+	const { user } = useAuth()
+	const { logout } = useActions()
 	const [scrolly, setScrolly] = useState(0)
+
 	const textColor =
 		scrolly < 300
 			? color === 'white'
@@ -96,27 +118,104 @@ const Header = ({ colorScheme, color, pos }: HeaderProps) => {
 					</Flex>
 				</Flex>
 
-				<HStack gap={'35px'}>
-					{/* <Icon as={AiOutlineShoppingCart} /> */}
-					<Button
-						display={{ base: 'none', md: 'block' }}
-						color={textColor}
-						variant={'link'}
-						fontWeight={'500'}
-					>
-						<Link href={'/login'}>Kiriw</Link>
-					</Button>
-					<Button
-						display={{
-							base: 'none',
-							sm: 'block',
-						}}
-						colorScheme='brand'
-						onClick={() => router.push('/register')}
-					>
-						Dizimnen otiw
-					</Button>
-				</HStack>
+				{!user ? (
+					<>
+						<HStack gap={'35px'}>
+							{/* <Icon as={AiOutlineShoppingCart} /> */}
+							<Button
+								display={{ base: 'none', md: 'block' }}
+								color={textColor}
+								variant={'link'}
+								fontWeight={'500'}
+							>
+								<Link href={'/login'}>Kiriw</Link>
+							</Button>
+							<Button
+								display={{
+									base: 'none',
+									sm: 'block',
+								}}
+								colorScheme='brand'
+								onClick={() => router.push('/register')}
+							>
+								Dizimnen otiw
+							</Button>
+						</HStack>
+					</>
+				) : (
+					<>
+						<Menu>
+							{({ isOpen }) => (
+								<>
+									<MenuButton
+										display={'flex'}
+										alignItems={'center'}
+										gap={2}
+										cursor={'pointer'}
+										as={HStack}
+									>
+										<Flex alignItems={'center'} gap={2}>
+											<Image
+												w='42px'
+												h='42px'
+												rounded={'full'}
+												src={user.avatar || 'https://picsum.photos/200'}
+											/>
+											<Text color={textColor}>{user.fullName}</Text>
+											<Icon
+												color={textColor}
+												fontSize={'14px'}
+												as={BsChevronDown}
+											/>
+										</Flex>
+									</MenuButton>
+									<MenuList>
+										<MenuItem
+											cursor={'pointer'}
+											as={Flex}
+											alignItems={'center'}
+											gap={2}
+										>
+											<BiUserCircle fontSize={'16px'} />
+											Profil
+										</MenuItem>
+										<MenuItem
+											cursor={'pointer'}
+											as={Flex}
+											alignItems={'center'}
+											gap={2}
+										>
+											<BsGrid fontSize={'16px'} />
+											Kurslarim
+										</MenuItem>
+										{user.role !== 'USER' ? (
+											<MenuItem
+												onClick={() => router.push('/admin-page')}
+												cursor={'pointer'}
+												as={Flex}
+												alignItems={'center'}
+												gap={2}
+											>
+												<HiOutlineShieldCheck fontSize={'16px'} />
+												Admin panel
+											</MenuItem>
+										) : null}
+										<MenuItem
+											cursor={'pointer'}
+											as={Flex}
+											alignItems={'center'}
+											gap={2}
+											onClick={() => logout()}
+										>
+											<AiOutlinePoweroff fontSize={'16px'} />
+											Shigiw
+										</MenuItem>
+									</MenuList>
+								</>
+							)}
+						</Menu>
+					</>
+				)}
 			</Box>
 		</Box>
 	)

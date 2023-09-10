@@ -1,3 +1,4 @@
+import { useTypedSelector } from '@/hooks/useTypedSelector'
 import { Box, Button, Grid, GridItem } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import CourseItem from '../CourseItem/course-item'
@@ -6,6 +7,8 @@ import SectionTitle from '../section-title/section-title'
 
 const HomeCourses = () => {
 	const router = useRouter()
+	const { courses } = useTypedSelector(state => state.course)
+
 	return (
 		<Box my={'40px'}>
 			<Container>
@@ -30,9 +33,9 @@ const HomeCourses = () => {
 						}}
 						gap={'30px'}
 					>
-						{[1, 2, 3, 4, 5, 6].map(item => (
-							<GridItem key={item}>
-								<CourseItem />
+						{courses?.map(item => (
+							<GridItem key={item._id}>
+								<CourseItem course={item} />
 							</GridItem>
 						))}
 					</Grid>

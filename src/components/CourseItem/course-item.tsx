@@ -17,7 +17,7 @@ import {
 	AiOutlineStar,
 } from 'react-icons/ai'
 import { CourseItemProps } from './course-item.props'
-const CourseItem: FC<CourseItemProps> = () => {
+const CourseItem: FC<CourseItemProps> = ({ course }) => {
 	const router = useRouter()
 	return (
 		<Card
@@ -29,7 +29,7 @@ const CourseItem: FC<CourseItemProps> = () => {
 			<Image
 				onClick={() => router.push(`/courses/node-js-course`)}
 				p={4}
-				src='/nodejs.jpeg'
+				src={course?.image}
 				width={'full'}
 				objectFit={'cover'}
 				height={'300px'}
@@ -67,7 +67,7 @@ const CourseItem: FC<CourseItemProps> = () => {
 					mb={2}
 					color={'textColor'}
 				>
-					Node.js toliq kurs.
+					{course?.title}
 				</Heading>
 				<Flex mt={'15px'} justify={'space-between'} alignItems={'center'}>
 					<HStack spacing={'14px'} align={'center'}>
@@ -77,7 +77,7 @@ const CourseItem: FC<CourseItemProps> = () => {
 							height={'40px'}
 							rounded={'full'}
 						/>
-						<Text color={'lightTextColor'}>Nicole Brown</Text>
+						<Text color={'lightTextColor'}>{course?.author?.fullName}</Text>
 					</HStack>
 
 					<HStack>
@@ -88,7 +88,7 @@ const CourseItem: FC<CourseItemProps> = () => {
 							rounded={'md'}
 							bg={'green.50'}
 						>
-							250.000 sum
+							{course?.price?.toLocaleString()} sum
 						</Text>
 					</HStack>
 				</Flex>

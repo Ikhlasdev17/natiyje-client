@@ -1,5 +1,6 @@
 import { Container, SectionOverlay } from '@/components'
 import CourseItem from '@/components/CourseItem/course-item'
+import { useTypedSelector } from '@/hooks/useTypedSelector'
 import {
 	Box,
 	Grid,
@@ -13,6 +14,8 @@ import {
 } from '@chakra-ui/react'
 
 const CoursesPageComponent = () => {
+	const { courses } = useTypedSelector(state => state.course)
+
 	return (
 		<>
 			<SectionOverlay />
@@ -32,6 +35,9 @@ const CoursesPageComponent = () => {
 			<Container>
 				<>
 					<Tabs
+						w={'full'}
+						overflowX={'auto'}
+						overflowY={'hidden'}
 						variant={'solid-rounded'}
 						colorScheme={'brand'}
 						alignItems={'center'}
@@ -55,9 +61,9 @@ const CoursesPageComponent = () => {
 									}}
 									gap={4}
 								>
-									{[1, 2, 3, 4, 5].map(item => (
-										<GridItem key={item}>
-											<CourseItem />
+									{courses?.map(item => (
+										<GridItem key={item._id}>
+											<CourseItem course={item} />
 										</GridItem>
 									))}
 								</Grid>
@@ -71,9 +77,9 @@ const CoursesPageComponent = () => {
 									}}
 									gap={4}
 								>
-									{[1, 2].map(item => (
-										<GridItem key={item}>
-											<CourseItem />
+									{courses?.map(item => (
+										<GridItem key={item._id}>
+											<CourseItem course={item} />
 										</GridItem>
 									))}
 								</Grid>
@@ -87,9 +93,9 @@ const CoursesPageComponent = () => {
 									}}
 									gap={4}
 								>
-									{[1, 2, 3].map(item => (
-										<GridItem key={item}>
-											<CourseItem />
+									{courses?.map(item => (
+										<GridItem key={item._id}>
+											<CourseItem course={item} />
 										</GridItem>
 									))}
 								</Grid>
@@ -103,9 +109,9 @@ const CoursesPageComponent = () => {
 									}}
 									gap={4}
 								>
-									{[1].map(item => (
-										<GridItem key={item}>
-											<CourseItem />
+									{courses?.map(item => (
+										<GridItem key={item._id}>
+											<CourseItem course={item} />
 										</GridItem>
 									))}
 								</Grid>
@@ -119,9 +125,9 @@ const CoursesPageComponent = () => {
 									}}
 									gap={4}
 								>
-									{[1, 2, 3, 4, 5].map(item => (
-										<GridItem key={item}>
-											<CourseItem />
+									{courses?.map(item => (
+										<GridItem key={item._id}>
+											<CourseItem course={item} />
 										</GridItem>
 									))}
 								</Grid>

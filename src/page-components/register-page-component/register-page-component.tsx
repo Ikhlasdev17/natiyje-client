@@ -1,4 +1,5 @@
 import TextField from '@/components/text-field/text-field'
+import { useActions } from '@/hooks/useActions'
 import { AuthValidators } from '@/validations/auth.validators'
 import {
 	Box,
@@ -9,15 +10,31 @@ import {
 	Image,
 	Stack,
 	Text,
+	useToast,
 } from '@chakra-ui/react'
 import { Form, Formik, FormikValues } from 'formik'
 import { useRouter } from 'next/router'
 
 const RegisterPageComponent = () => {
 	const router = useRouter()
+	const { register } = useActions()
+	const toast = useToast()
 
 	const onSubmit = (formikValues: FormikValues) => {
 		console.log(formikValues)
+		register({
+			fullName: formikValues.fullName,
+			phone: formikValues.phone,
+			password: formikValues.password,
+		})
+
+		toast({
+			title: 'Siz awmetli dizimnen ottiniz!',
+			status: 'success',
+			position: 'top',
+		})
+
+		router.push('/')
 	}
 
 	return (

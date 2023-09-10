@@ -1,4 +1,5 @@
 import TextField from '@/components/text-field/text-field'
+import { useActions } from '@/hooks/useActions'
 import { AuthValidators } from '@/validations/auth.validators'
 import {
 	Box,
@@ -9,15 +10,38 @@ import {
 	Image,
 	Stack,
 	Text,
+	useToast,
 } from '@chakra-ui/react'
 import { Form, Formik, FormikValues } from 'formik'
 import { useRouter } from 'next/router'
 
 const LoginPageComponent = () => {
+	const { login } = useActions()
 	const router = useRouter()
 
+	const toast = useToast()
+
 	const onSubmit = (formData: FormikValues) => {
-		console.log(formData)
+		login({
+			phone: formData.phone,
+			password: formData.password,
+			callback() {
+				toast({
+					title: 'Qaytqaninizdan quwanishlimiz :)',
+					status: 'success',
+					position: 'top',
+				})
+
+				router.push('/')
+			},
+			callbackError() {
+				toast({
+					title: 'Nomeriniz yaki paroliniz qate!',
+					status: 'error',
+					position: 'top',
+				})
+			},
+		})
 	}
 
 	return (

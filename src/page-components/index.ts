@@ -1,3 +1,8 @@
+export { default as AdminBlogPageComponent } from './admin-page-component/admin-blog-page-component'
+export { default as AdminCoursePageComponent } from './admin-page-component/admin-course-page-component'
+export { default as AdminInstructorPageComponent } from './admin-page-component/admin-instructor-page-component'
+export { default as AdminStudentsPageComponent } from './admin-page-component/admin-students-page-component'
+export { default as DashboardPageComponent } from './admin-page-component/dashboard-page-component'
 export { default as CourseDetailedPageComponent } from './course-detailed-page-component/course-detailed-page-component'
 export { default as CoursesPageComponent } from './courses-page-component/courses-page-component'
 export { default as HomePageComponent } from './home-page-component/home-page-component'

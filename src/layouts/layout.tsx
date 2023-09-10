@@ -1,3 +1,4 @@
+import AppProvider, { AppProviderProps } from '@/providers/app.provider'
 import { useRouter } from 'next/router'
 import { FunctionComponent, ReactElement } from 'react'
 import Header from './header/header'
@@ -19,13 +20,17 @@ const Layout = ({ children }: LayoutProps) => {
 
 export default Layout
 
-export const withLayout = <T extends Record<string, unknown>>(
+export const withLayout = <
+	T extends Record<string, unknown> & AppProviderProps
+>(
 	Component: FunctionComponent<T>
 ) => {
 	return function withLayoutComponent(props: T): ReactElement {
 		return (
 			<Layout>
-				<Component {...props} />
+				<AppProvider courses={props.courses}>
+					<Component {...props} />
+				</AppProvider>
 			</Layout>
 		)
 	}
