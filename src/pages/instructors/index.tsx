@@ -1,7 +1,12 @@
 import { withLayout } from '@/layouts/layout'
+import { InstructorPageComponent } from '@/page-components'
 
 const Instructors = () => {
-	return <div>Instructors</div>
+	return (
+		<>
+			<InstructorPageComponent />
+		</>
+	)
 }
 
 export default withLayout(Instructors)

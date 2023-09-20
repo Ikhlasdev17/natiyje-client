@@ -1,3 +1,80 @@
 #nprogress .bar {
 	background: #f56962 !important;
 }
+
+/* React Tags Component */
+.rti--container {
+	background-color: transparent !important;
+	border: 1px solid #375896 !important;
+}
+
+.rti--input {
+	padding: 3px;
+	background-color: transparent;
+}
+
+.rti--tag {
+	background-color: #375896 !important;
+	color: #fff !important;
+	padding: 0 10px !important;
+}
+
+/* React Quill Component */
+.ql-toolbar {
+	background-color: white;
+	border-top-right-radius: 8px;
+	border-top-left-radius: 8px;
+}
+
+.ql-container.ql-snow {
+	border-bottom-left-radius: 8px;
+	border-bottom-right-radius: 8px;
+}
+
+.ql-editor {
+	min-height: 150px;
+}
+
+/* File uploader component */
+.ewqTBN {
+	min-width: 100% !important;
+	height: 180px !important;
+	border-color: 1px dashed #375896;
+}
+.css-bn3r7u {
+	min-height: 30vh !important;
+	z-index: 999;
+}
+.fr-box,
+.fr-wrapper,
+.fr-element {
+	min-height: 30vh !important;
+}
+
+.fr-quick-insert {
+	z-index: 99999 !important;
+	left: -20px !important;
+	top: 100px !important;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.sc-aXZVg {
+	min-width: 100% !important;
+	flex-direction: column !important;
+	flex-wrap: nowrap !important;
+	min-height: 130px !important;
+	display: flex;
+}
+
+.sc-aXZVg svg {
+	width: 50px;
+	height: 50px;
+}
+
+.sc-eqUAAy {
+	flex-direction: column;
+	justify-content: center !important;
+	align-items: center !important;
+}

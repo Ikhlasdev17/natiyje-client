@@ -5,4 +5,5 @@ export interface TextFieldPropsType {
 	placeholder?: string
 	children?: ReactNode
 	type?: string
+	readOnly?: boolean
 }

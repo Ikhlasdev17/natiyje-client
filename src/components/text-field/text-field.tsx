@@ -4,6 +4,7 @@ import {
 	FormLabel,
 	Input,
 	InputGroup,
+	useColorModeValue,
 } from '@chakra-ui/react'
 import { ErrorMessage, FieldHookConfig, useField } from 'formik'
 import { FC } from 'react'
@@ -14,13 +15,18 @@ const TextField: FC<TextFieldPropsType & FieldHookConfig<string>> = ({
 	label,
 	placeholder,
 	type,
+	readOnly,
 	...props
 }) => {
 	const [field, meta] = useField(props)
 
 	return (
 		<FormControl isRequired isInvalid={!!meta.touched && !!meta.error} mt={5}>
-			<FormLabel fontSize={'18px'} fontWeight={'400'} color={'textColor'}>
+			<FormLabel
+				fontSize={'18px'}
+				fontWeight={'400'}
+				color={useColorModeValue('textColor', 'white')}
+			>
 				{label}
 			</FormLabel>
 			<InputGroup>
@@ -33,6 +39,8 @@ const TextField: FC<TextFieldPropsType & FieldHookConfig<string>> = ({
 					placeholder={placeholder}
 					h={14}
 					{...field}
+					required={false}
+					readOnly={readOnly || false}
 				/>
 			</InputGroup>
 			<FormErrorMessage>

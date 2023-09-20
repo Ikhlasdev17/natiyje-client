@@ -21,6 +21,7 @@ const AdminSidebar = () => {
 			w={'full'}
 			bg={'indigo.500'}
 			h={'100vh'}
+			overflowY={'auto'}
 			borderRight={'1px '}
 			borderRightColor={useColorModeValue('gray.100', 'gray.700')}
 		>

@@ -5,12 +5,15 @@ import {
 	SectionOverlay,
 } from '@/components'
 import CourseDetailCard from '@/components/course-detail-card/course-detail-card'
+import { useTypedSelector } from '@/hooks/useTypedSelector'
 import { Box, Flex } from '@chakra-ui/react'
 
 const CourseDetailedPageComponent = () => {
+	const { course } = useTypedSelector(state => state.course)
+
 	return (
 		<>
-			<SectionOverlay />
+			<SectionOverlay h={'400px'} />
 
 			<Container
 				mt={{

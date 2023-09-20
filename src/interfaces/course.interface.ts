@@ -1,9 +1,11 @@
+import { SectionType } from './section.interface'
+
 export interface CourseType {
 	isActive?: boolean
 	_id?: string
 	title?: string
-	description?: string
-	price?: number
+	description?: any
+	price?: number | null
 	author?: Author
 	excerpt?: string
 	learn?: string[]
@@ -15,7 +17,9 @@ export interface CourseType {
 	createdAt?: Date
 	updatedAt?: Date
 	__v?: number
-	sections?: string[]
+	sections?: SectionType[]
+	embedVideo: ''
+	slug?: string
 }
 
 export interface Author {

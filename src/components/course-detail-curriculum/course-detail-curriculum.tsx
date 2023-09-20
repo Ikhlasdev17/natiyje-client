@@ -1,4 +1,4 @@
-import { sections } from '@/config/constants'
+import { useTypedSelector } from '@/hooks/useTypedSelector'
 import {
 	Accordion,
 	AccordionButton,
@@ -17,6 +17,7 @@ import EmbedVideoModal from '../embed-video-modal/embed-video-modal'
 
 const CourseDetailCurriculum = () => {
 	const { isOpen, onOpen, onClose } = useDisclosure()
+	const { course } = useTypedSelector(state => state.course)
 
 	return (
 		<Box>
@@ -25,20 +26,24 @@ const CourseDetailCurriculum = () => {
 				onOpen={onOpen}
 				onClose={onClose}
 				embedVideo={
-					<iframe
-						width='100%'
-						height='100%'
-						src='https://www.youtube.com/embed/ZbdUKRyZnuY'
-						title='HTMX заменит Frontend?! WTF?'
-						allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
-						allowFullScreen
-					></iframe>
+					<>
+						<iframe
+							allow='autoplay'
+							className='spotlightr'
+							allowTransparency
+							allowFullScreen
+							src='https://videos.cdn.spotlightr.com/watch/MTQ5MDkyNA==?fallback=true'
+							name='videoPlayer'
+						>
+							{' '}
+						</iframe>
+					</>
 				}
 			/>
 
 			<Accordion allowToggle defaultIndex={[0]} allowMultiple>
-				{sections.map(item => (
-					<AccordionItem border={'none'} key={item.id}>
+				{course?.sections?.map(item => (
+					<AccordionItem border={'none'} key={item._id}>
 						<AccordionButton
 							borderLeft={'2px'}
 							borderLeftColor={'brand.200'}
@@ -53,37 +58,37 @@ const CourseDetailCurriculum = () => {
 						</AccordionButton>
 
 						<AccordionPanel>
-							{item.lessons.map(lesson => (
+							{item?.lessons?.map(lesson => (
 								<Flex
-									key={item.title}
+									key={lesson?.name}
 									p={1}
 									bg={'gray.100'}
 									rounded={'md'}
 									justifyContent={'space-between'}
 									alignItems={'center'}
 									mb={2}
-									cursor={lesson.embedVideo ? 'pointer' : ''}
-									opacity={lesson.embedVideo ? '1' : '.7'}
+									cursor={lesson?.embedVideo ? 'pointer' : ''}
+									opacity={lesson?.embedVideo ? '1' : '.7'}
 								>
 									<HStack>
 										<Icon
-											color={lesson.embedVideo ? 'brand.500' : 'textColor'}
+											color={lesson?.embedVideo ? 'brand.500' : 'textColor'}
 											as={AiOutlinePlayCircle}
 											p={1}
 											fontSize={'24px'}
 											onClick={() => {
-												if (lesson.embedVideo) {
+												if (lesson?.embedVideo) {
 													onOpen()
 												}
 											}}
 										/>
 										<Text fontSize={'14px'} color={'lightTextColor'}>
-											{lesson.title}
+											{lesson.name}
 										</Text>
 									</HStack>
 
 									<Text fontSize={'14px'} pr={3} color={'lightTextColor'}>
-										{lesson.duration}
+										{lesson.hour}:{lesson.minute}:{lesson.second}
 									</Text>
 								</Flex>
 							))}

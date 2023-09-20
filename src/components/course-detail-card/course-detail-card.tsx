@@ -1,3 +1,5 @@
+import { loadImage } from '@/helpers/load-image'
+import { useTypedSelector } from '@/hooks/useTypedSelector'
 import {
 	Box,
 	Button,
@@ -10,6 +12,7 @@ import {
 	Text,
 	useDisclosure,
 } from '@chakra-ui/react'
+import { useRouter } from 'next/router'
 import {
 	AiFillPlayCircle,
 	AiOutlineFacebook,
@@ -28,6 +31,9 @@ import EmbedVideoModal from '../embed-video-modal/embed-video-modal'
 
 const CourseDetailCard = () => {
 	const { isOpen, onOpen, onClose } = useDisclosure()
+	const { course } = useTypedSelector(state => state.course)
+	const { user } = useTypedSelector(state => state.user)
+	const router = useRouter()
 
 	return (
 		<Box
@@ -45,16 +51,7 @@ const CourseDetailCard = () => {
 				isOpen={isOpen}
 				onOpen={onOpen}
 				onClose={onClose}
-				embedVideo={
-					<iframe
-						width='100%'
-						height='100%'
-						src='https://www.youtube.com/embed/ZbdUKRyZnuY'
-						title='HTMX заменит Frontend?! WTF?'
-						allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
-						allowFullScreen
-					></iframe>
-				}
+				embedVideo={course?.embedVideo}
 			/>
 
 			<Box
@@ -71,7 +68,7 @@ const CourseDetailCard = () => {
 					rounded={'md'}
 				></Box>
 				<Image
-					src='https://picsum.photos/400'
+					src={loadImage(course?.image as string) || ''}
 					rounded={'md'}
 					w={'full'}
 					height={'250px'}
@@ -100,12 +97,36 @@ const CourseDetailCard = () => {
 			/>
 
 			<Heading color={'textColor'} fontSize={'30px'} my={4} fontWeight={'500'}>
-				250.000 sum
+				{course?.price?.toLocaleString()} sum
 			</Heading>
 
-			<Button colorScheme='brand' w={'full'} h={12}>
-				Hazir satip aliw
-			</Button>
+			{user ? (
+				user?.courses?.findIndex(item => item._id === course?._id) === -1 ? (
+					<Button colorScheme='brand' w={'full'} h={12}>
+						Hazir satip aliw
+					</Button>
+				) : (
+					<Button
+						colorScheme='brand'
+						w={'full'}
+						h={12}
+						onClick={() => {
+							router.push(`/courses/dashboard/${course?.slug}`)
+						}}
+					>
+						Kursti dawam etiw
+					</Button>
+				)
+			) : (
+				<Button
+					onClick={() => router.push('/register')}
+					colorScheme='brand'
+					w={'full'}
+					h={12}
+				>
+					Dizimnen otiw
+				</Button>
+			)}
 
 			<Text
 				my={4}

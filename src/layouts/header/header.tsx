@@ -1,4 +1,5 @@
 import { headerMenuItems } from '@/config/constants'
+import { loadImage } from '@/helpers/load-image'
 import { useActions } from '@/hooks/useActions'
 import { useAuth } from '@/hooks/useAuth'
 import {
@@ -156,12 +157,29 @@ const Header = ({ colorScheme, color, pos }: HeaderProps) => {
 									>
 										<Flex alignItems={'center'} gap={2}>
 											<Image
-												w='42px'
-												h='42px'
+												ml={4}
+												minW='42px'
+												maxW='42px'
+												maxH='42px'
+												minH='42px'
 												rounded={'full'}
-												src={user.avatar || 'https://picsum.photos/200'}
+												border={'1px'}
+												borderColor={'green.500'}
+												objectFit={'cover'}
+												src={
+													loadImage(user.avatar || null) ||
+													'https://picsum.photos/200'
+												}
 											/>
-											<Text color={textColor}>{user.fullName}</Text>
+											<Text
+												display={{
+													base: 'none',
+													md: 'block',
+												}}
+												color={textColor}
+											>
+												{user.fullName}
+											</Text>
 											<Icon
 												color={textColor}
 												fontSize={'14px'}
@@ -175,6 +193,7 @@ const Header = ({ colorScheme, color, pos }: HeaderProps) => {
 											as={Flex}
 											alignItems={'center'}
 											gap={2}
+											onClick={() => router.push('/profile')}
 										>
 											<BiUserCircle fontSize={'16px'} />
 											Profil
@@ -205,7 +224,10 @@ const Header = ({ colorScheme, color, pos }: HeaderProps) => {
 											as={Flex}
 											alignItems={'center'}
 											gap={2}
-											onClick={() => logout()}
+											onClick={() => {
+												router.push('/register')
+												logout()
+											}}
 										>
 											<AiOutlinePoweroff fontSize={'16px'} />
 											Shigiw

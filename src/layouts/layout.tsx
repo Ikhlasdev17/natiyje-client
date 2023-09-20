@@ -28,7 +28,12 @@ export const withLayout = <
 	return function withLayoutComponent(props: T): ReactElement {
 		return (
 			<Layout>
-				<AppProvider courses={props.courses}>
+				<AppProvider
+					fullCourse={props.fullCourse}
+					courses={props.courses}
+					course={props.course}
+					fileFolders={[]}
+				>
 					<Component {...props} />
 				</AppProvider>
 			</Layout>

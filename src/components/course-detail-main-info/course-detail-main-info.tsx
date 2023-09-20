@@ -1,3 +1,4 @@
+import { useTypedSelector } from '@/hooks/useTypedSelector'
 import {
 	Box,
 	BoxProps,
@@ -16,6 +17,7 @@ import {
 import { BiTimeFive } from 'react-icons/bi'
 
 const CourseDetailMainInfo: FC<BoxProps> = ({ ...props }) => {
+	const { course } = useTypedSelector(state => state.course)
 	return (
 		<Box
 			p={{
@@ -38,7 +40,7 @@ const CourseDetailMainInfo: FC<BoxProps> = ({ ...props }) => {
 				}}
 				mb={'20px'}
 			>
-				Adobe CC Masterclass: Photoshop, Illustrator, XD & InDesign
+				{course?.title}
 			</Heading>
 			<Text
 				color={'#5F5982'}
@@ -49,8 +51,7 @@ const CourseDetailMainInfo: FC<BoxProps> = ({ ...props }) => {
 				fontWeight={'400'}
 				mb={'20px'}
 			>
-				Learn graphic design today with Photoshop, Illustrator, Adobe XD,
-				InDesign & more in this Adobe CC Masterclass!
+				{course?.excerpt}
 			</Text>
 			<Flex
 				gap={'24px'}

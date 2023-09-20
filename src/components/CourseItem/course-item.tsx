@@ -1,3 +1,4 @@
+import { loadImage } from '@/helpers/load-image'
 import {
 	Box,
 	Card,
@@ -27,9 +28,9 @@ const CourseItem: FC<CourseItemProps> = ({ course }) => {
 			transition={'.3s ease'}
 		>
 			<Image
-				onClick={() => router.push(`/courses/node-js-course`)}
+				onClick={() => router.push(`/courses/${course.slug}`)}
 				p={4}
-				src={course?.image}
+				src={loadImage(course?.image as string)}
 				width={'full'}
 				objectFit={'cover'}
 				height={'300px'}

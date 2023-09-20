@@ -1,3 +1,4 @@
+import { loadImage } from '@/helpers/load-image'
 import { useActions } from '@/hooks/useActions'
 import { useAuth } from '@/hooks/useAuth'
 import {
@@ -94,10 +95,14 @@ const AdminHeader: FC<AdminHeaderPropsType> = () => {
 								>
 									<Flex alignItems={'center'} gap={2}>
 										<Image
+											objectFit={'cover'}
 											w='37px'
 											h='37px'
 											rounded={'full'}
-											src={user?.avatar || 'https://picsum.photos/200'}
+											src={
+												loadImage(user?.avatar || null) ||
+												'https://picsum.photos/200'
+											}
 										/>
 									</Flex>
 								</MenuButton>

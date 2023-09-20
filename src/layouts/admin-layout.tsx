@@ -1,7 +1,8 @@
 import { useActions } from '@/hooks/useActions'
 import { useOnClickOutside } from '@/hooks/useClickOutside'
 import { useTypedSelector } from '@/hooks/useTypedSelector'
-import AppProvider, { AppProviderProps } from '@/providers/app.provider'
+import AppProvider from '@/providers/admin.provider'
+import { AppProviderProps } from '@/providers/app.provider'
 import { Box, Flex, useColorModeValue } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import { FunctionComponent, ReactElement, useRef } from 'react'
@@ -33,7 +34,7 @@ const AdminLayout = ({ children }: LayoutProps) => {
 					base: 'fixed',
 					md: 'sticky',
 				}}
-				zIndex={'9999'}
+				zIndex={'50'}
 				bg={useColorModeValue('white', 'gray.800')}
 				top={'0'}
 				left={{
@@ -41,11 +42,12 @@ const AdminLayout = ({ children }: LayoutProps) => {
 					md: 0,
 				}}
 				ref={sidebarRef}
+				overflowY={'auto'}
 			>
 				<AdminSidebar />
 			</Box>
 
-			<Box w={'100%'} p={6}>
+			<Box w={'100%'} p={6} h={'100vh'} overflowY={'auto'}>
 				<AdminHeader />
 				{children}
 			</Box>
@@ -63,7 +65,11 @@ export const withAdminLayout = <
 	return function withLayoutComponent(props: T): ReactElement {
 		return (
 			<AdminLayout>
-				<AppProvider courses={props.courses}>
+				<AppProvider
+					courses={props.courses}
+					fileFolders={props.fileFolders}
+					course={props.course}
+				>
 					<Component {...props} />
 				</AppProvider>
 			</AdminLayout>
