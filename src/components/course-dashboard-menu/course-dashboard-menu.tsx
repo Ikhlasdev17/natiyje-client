@@ -1,4 +1,5 @@
 import { useActions } from '@/hooks/useActions'
+import { useAuth } from '@/hooks/useAuth'
 import { useTypedSelector } from '@/hooks/useTypedSelector'
 import { LessonType } from '@/interfaces/section.interface'
 import {
@@ -23,6 +24,7 @@ const CourseDashboardMenu = () => {
 	const router = useRouter()
 	const { getLesson } = useActions()
 	const [lessonModule, setLessonModule] = useState<number>(0)
+	const { user } = useAuth()
 
 	const onLesson = (lesson: LessonType) => {
 		getLesson(lesson)
@@ -110,8 +112,17 @@ const CourseDashboardMenu = () => {
 						</AccordionButton>
 
 						<AccordionPanel px={0} pb={2}>
-							{item.lessons?.map(lesson => (
+							{item.lessons?.map((lesson, index) => (
 								<Button
+									// isDisabled={
+									// 	item.lessons
+									// 		? Boolean(
+									// 				!item.lessons[index - 1]?.completed?.includes(
+									// 					user?._id
+									// 				)
+									// 		  )
+									// 		: false
+									// }
 									display={'flex'}
 									alignItems={'center'}
 									w={'full'}
@@ -123,11 +134,12 @@ const CourseDashboardMenu = () => {
 									}
 									px={2}
 									onClick={() => onLesson(lesson)}
+									wordBreak={'break-word'}
 								>
-									<HStack>
+									<HStack maxW={'70%'} overflowX={'hidden'}>
 										<Checkbox colorScheme='brand' />
 										<Text fontSize={'15px'} fontWeight={'500'}>
-											{lesson.name}
+											{lesson.name}...
 										</Text>
 									</HStack>
 									<Text

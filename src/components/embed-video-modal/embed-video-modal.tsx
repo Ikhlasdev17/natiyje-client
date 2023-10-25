@@ -19,16 +19,7 @@ const EmbedVideoModal: FC<EmbedVideoModalPropsType> = ({
 					}}
 					p={0}
 				>
-					<Box
-						height={{
-							base: '40vh',
-							lg: '60vh',
-						}}
-						w={'100%'}
-					>
-						{' '}
-						{embedVideo}
-					</Box>
+					<Box w={'100%'}> {embedVideo}</Box>
 				</ModalContent>
 			</Modal>
 		</>

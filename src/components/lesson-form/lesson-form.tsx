@@ -26,11 +26,13 @@ const LessonForm = ({ onComplete, data }: LessonFormPropsType) => {
 	const [initialValues, setInitialValues] = useState(
 		initialLessonCreateFormData
 	)
-	const [selectedFolder, setSelectedFolder] = useState('34903')
 	const [videoUrl, setVideoUrl] = useState('')
 
 	const { folders } = useTypedSelector(state => state.file)
 	const { isLoading } = useTypedSelector(state => state.course)
+	const [selectedFolder, setSelectedFolder] = useState(
+		folders[0]?.id.toString() || '36850'
+	)
 
 	const upload = async (file: File) => {
 		setVideoUploading(true)

@@ -38,7 +38,7 @@ const CourseDetailCard = () => {
 	return (
 		<Box
 			w={'full'}
-			height={'full'}
+			minH={'full'}
 			bg={'white'}
 			rounded='md'
 			shadow={{
@@ -61,7 +61,7 @@ const CourseDetailCard = () => {
 				justifyContent={'center'}
 			>
 				<Box
-					height={'250px'}
+					height={'full'}
 					w={'full'}
 					bg={'rgba(0,0,0,.4)'}
 					pos={'absolute'}
@@ -71,8 +71,8 @@ const CourseDetailCard = () => {
 					src={loadImage(course?.image as string) || ''}
 					rounded={'md'}
 					w={'full'}
-					height={'250px'}
-					objectFit={'cover'}
+					maxH={'250px'}
+					objectFit={'contain'}
 				/>
 				<Icon
 					onClick={onOpen}

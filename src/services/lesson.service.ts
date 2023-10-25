@@ -34,4 +34,14 @@ export const LessonService = {
 
 		return response
 	},
+	async openLesson(id: string) {
+		const response = await $axios.put(getLessonUrl(`open/${id}`))
+
+		return response
+	},
+	async closeLesson(id: string) {
+		const response = await $axios.put(getLessonUrl(`close/${id}`))
+
+		return response
+	},
 }

@@ -1,12 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit'
 import {
 	changeLessonPosition,
+	closeLesson,
 	createCourse,
 	createLesson,
 	createSection,
 	deleteCourse,
 	deleteSection,
 	getCourseSections,
+	openLesson,
 	updateCourse,
 } from './course.actions'
 import { CourseInitialStateProps } from './course.interface'
@@ -103,6 +105,24 @@ export const courseSlice = createSlice({
 				state.isLoading = false
 			})
 			.addCase(updateCourse.rejected, state => {
+				state.isLoading = false
+			})
+			.addCase(openLesson.pending, state => {
+				state.isLoading = true
+			})
+			.addCase(openLesson.fulfilled, (state, action) => {
+				state.isLoading = false
+			})
+			.addCase(openLesson.rejected, state => {
+				state.isLoading = false
+			})
+			.addCase(closeLesson.pending, state => {
+				state.isLoading = true
+			})
+			.addCase(closeLesson.fulfilled, (state, action) => {
+				state.isLoading = false
+			})
+			.addCase(closeLesson.rejected, state => {
 				state.isLoading = false
 			})
 	},

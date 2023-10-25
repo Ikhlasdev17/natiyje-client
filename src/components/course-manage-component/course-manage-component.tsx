@@ -253,9 +253,9 @@ const CourseManageComponent: FC<CourseManagePropsType> = ({
 							h={14}
 							w={'full'}
 							my={4}
-							onClick={() => {
-								formik.submitForm()
-							}}
+							// onClick={() => {
+							// 	formik.submitForm()
+							// }}
 							isLoading={isLoading}
 						>
 							Submit

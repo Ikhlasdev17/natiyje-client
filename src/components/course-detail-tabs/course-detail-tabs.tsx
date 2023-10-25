@@ -7,11 +7,11 @@ import CourseDetailReviews from '../course-detail-reviews/course-detail-reviews'
 const CourseDetailTabs = () => {
 	return (
 		<Tabs colorScheme='brand' isFitted variant={'enclosed-colored'}>
-			<TabList w={'full'} overflowY={'auto'}>
-				<Tab>Overview</Tab>
-				<Tab>Curriculum</Tab>
-				<Tab>Instructor</Tab>
-				<Tab>Reviews</Tab>
+			<TabList w={'full'} overflowX={'auto'} overflowY={'hidden'}>
+				<Tab>Kurs haqqinda</Tab>
+				<Tab>Sabaqlar</Tab>
+				<Tab>Mentor</Tab>
+				<Tab>Pikirler</Tab>
 			</TabList>
 			<TabPanels>
 				<TabPanel>

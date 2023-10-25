@@ -7,7 +7,6 @@ import {
 	Button,
 	Flex,
 	HStack,
-	Heading,
 	Icon,
 	Image,
 	Menu,
@@ -25,6 +24,7 @@ import { BsChevronDown, BsGrid } from 'react-icons/bs'
 import { HiOutlineShieldCheck } from 'react-icons/hi2'
 import { RiMenu4Line } from 'react-icons/ri'
 import { HeaderProps } from './header.props'
+
 const Header = ({ colorScheme, color, pos }: HeaderProps) => {
 	const { user } = useAuth()
 	const { logout } = useActions()
@@ -82,14 +82,20 @@ const Header = ({ colorScheme, color, pos }: HeaderProps) => {
 						sm: '',
 					}}
 				>
-					<Heading
+					<Image
+						src={
+							scrolly < 300
+								? color === 'white'
+									? '/light-logo.svg'
+									: '/dark-logo.svg'
+								: '/dark-logo.svg'
+						}
 						onClick={() => router.push('/')}
 						cursor={'pointer'}
 						color={textColor}
 						textTransform={'uppercase'}
-					>
-						Nátiyje
-					</Heading>
+						width={120}
+					/>
 					<Button
 						display={{
 							base: 'block',

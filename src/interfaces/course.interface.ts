@@ -25,4 +25,5 @@ export interface CourseType {
 export interface Author {
 	_id?: string
 	fullName?: string
+	avatar?: string
 }

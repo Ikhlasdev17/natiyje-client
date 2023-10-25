@@ -76,7 +76,8 @@ const AdminCourseItem = ({ course }: { course: CourseType }) => {
 					src={loadImage(course.image as string) || 'https://picsum.photos/300'}
 					rounded={'md'}
 					w={'full'}
-					h={'240px'}
+					maxH={'240px'}
+					objectFit={'contain'}
 				/>
 				<Heading fontSize={'22px'} mt={4}>
 					{course.title}

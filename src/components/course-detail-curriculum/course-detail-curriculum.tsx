@@ -12,11 +12,13 @@ import {
 	Text,
 	useDisclosure,
 } from '@chakra-ui/react'
+import { useState } from 'react'
 import { AiOutlinePlayCircle } from 'react-icons/ai'
 import EmbedVideoModal from '../embed-video-modal/embed-video-modal'
 
 const CourseDetailCurriculum = () => {
 	const { isOpen, onOpen, onClose } = useDisclosure()
+	const [selectedVideo, setSelectedVideo] = useState('')
 	const { course } = useTypedSelector(state => state.course)
 
 	return (
@@ -27,16 +29,18 @@ const CourseDetailCurriculum = () => {
 				onClose={onClose}
 				embedVideo={
 					<>
-						<iframe
-							allow='autoplay'
-							className='spotlightr'
-							allowTransparency
+						<Box
+							as='iframe'
+							src={selectedVideo}
+							w={'full'}
+							h={'400px'}
+							display={'flex'}
+							justifyContent={'center'}
+							alignItems={'center'}
 							allowFullScreen
-							src='https://videos.cdn.spotlightr.com/watch/MTQ5MDkyNA==?fallback=true'
-							name='videoPlayer'
-						>
-							{' '}
-						</iframe>
+							textAlign={'center'}
+							rounded={'md'}
+						/>
 					</>
 				}
 			/>
@@ -78,6 +82,7 @@ const CourseDetailCurriculum = () => {
 											fontSize={'24px'}
 											onClick={() => {
 												if (lesson?.embedVideo) {
+													setSelectedVideo(lesson.embedVideo)
 													onOpen()
 												}
 											}}

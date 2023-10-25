@@ -68,7 +68,13 @@ const RegisterPageComponent = () => {
 					onClick={() => router.push('/')}
 					cursor={'pointer'}
 				>
-					NATIYJE
+					<Image
+						src={'/light-logo.svg'}
+						onClick={() => router.push('/')}
+						cursor={'pointer'}
+						textTransform={'uppercase'}
+						width={120}
+					/>
 				</Heading>
 
 				<HStack spacing={'40px'}>

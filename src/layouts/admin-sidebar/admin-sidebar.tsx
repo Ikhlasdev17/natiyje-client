@@ -5,6 +5,7 @@ import {
 	Button,
 	Divider,
 	Heading,
+	Image,
 	Stack,
 	Text,
 	useColorModeValue,
@@ -35,7 +36,14 @@ const AdminSidebar = () => {
 				borderBottom={'1px'}
 				borderBottomColor={useColorModeValue('gray.100', 'gray.700')}
 			>
-				Nátiyje
+				<Image
+					src={useColorModeValue('/dark-logo.svg', '/light-logo.svg')}
+					onClick={() => router.push('/')}
+					cursor={'pointer'}
+					textTransform={'uppercase'}
+					width={120}
+					mx={'auto'}
+				/>
 			</Heading>
 
 			<Stack p={4}>

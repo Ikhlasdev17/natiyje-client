@@ -203,3 +203,33 @@ export const updateCourse = createAsyncThunk(
 		}
 	}
 )
+
+export const openLesson = createAsyncThunk<
+	'Success',
+	{ id: string; callback: () => void }
+>('lesson/open', async ({ id, callback }, thunkAPI) => {
+	try {
+		const response = await LessonService.openLesson(id)
+		if (response.status === 200) {
+			callback()
+		}
+		return response.data
+	} catch (error) {
+		return thunkAPI.rejectWithValue(error)
+	}
+})
+
+export const closeLesson = createAsyncThunk<
+	'Success',
+	{ id: string; callback: () => void }
+>('lesson/close', async ({ id, callback }, thunkAPI) => {
+	try {
+		const response = await LessonService.closeLesson(id)
+		if (response.status === 200) {
+			callback()
+		}
+		return response.data
+	} catch (error) {
+		return thunkAPI.rejectWithValue(error)
+	}
+})

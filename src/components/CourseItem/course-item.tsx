@@ -30,10 +30,10 @@ const CourseItem: FC<CourseItemProps> = ({ course }) => {
 			<Image
 				onClick={() => router.push(`/courses/${course.slug}`)}
 				p={4}
-				src={loadImage(course?.image as string)}
+				src={loadImage(course?.image as string) || ''}
 				width={'full'}
-				objectFit={'cover'}
-				height={'300px'}
+				objectFit={'contain'}
+				maxH={'300px'}
 				borderRadius={'20px'}
 			/>
 			<Flex
@@ -73,10 +73,14 @@ const CourseItem: FC<CourseItemProps> = ({ course }) => {
 				<Flex mt={'15px'} justify={'space-between'} alignItems={'center'}>
 					<HStack spacing={'14px'} align={'center'}>
 						<Image
-							src='https://picsum.photos/40'
+							src={
+								loadImage(course.author?.avatar || '') ||
+								'https://picsum.photos/300'
+							}
 							w={'40px'}
 							height={'40px'}
 							rounded={'full'}
+							objectFit={'cover'}
 						/>
 						<Text color={'lightTextColor'}>{course?.author?.fullName}</Text>
 					</HStack>

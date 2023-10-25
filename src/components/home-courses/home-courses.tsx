@@ -33,11 +33,13 @@ const HomeCourses = () => {
 						}}
 						gap={'30px'}
 					>
-						{courses?.map(item => (
-							<GridItem key={item._id}>
-								<CourseItem course={item} />
-							</GridItem>
-						))}
+						{courses
+							?.filter(x => x.isActive)
+							?.map(item => (
+								<GridItem key={item._id}>
+									<CourseItem course={item} />
+								</GridItem>
+							))}
 					</Grid>
 				</>
 			</Container>

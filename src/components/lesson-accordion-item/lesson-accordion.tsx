@@ -10,7 +10,8 @@ const LessonAccordion = ({
 	lessons,
 	sectionId,
 }: LessonAccordionItemProps) => {
-	const { changeLessonPosition, getCourseSections } = useActions()
+	const { changeLessonPosition, getCourseSections, openLesson, closeLesson } =
+		useActions()
 	const { query } = useRouter()
 
 	const onDragStartLesson = (e: any) => {
@@ -35,6 +36,23 @@ const LessonAccordion = ({
 		})
 	}
 
+	const openLessonFunc = (id: string) => {
+		openLesson({
+			id,
+			callback() {
+				getCourseSections({ id: query.slug as string })
+			},
+		})
+	}
+	const closeLessonFunc = (id: string) => {
+		closeLesson({
+			id,
+			callback() {
+				getCourseSections({ id: query.slug as string })
+			},
+		})
+	}
+
 	return (
 		<>
 			<Flex
@@ -52,7 +70,18 @@ const LessonAccordion = ({
 					<Text>{lesson.name}</Text>
 				</HStack>
 				<HStack>
-					<Button size={'sm'} colorScheme='facebook' variant={'ghost'}>
+					<Button
+						onClick={() => {
+							if (!lesson?.isOpen) {
+								openLessonFunc(lesson._id as string)
+							} else {
+								closeLessonFunc(lesson._id as string)
+							}
+						}}
+						size={'sm'}
+						colorScheme='facebook'
+						variant={'ghost'}
+					>
 						<Icon as={lesson?.isOpen ? BsUnlock : BsLock} />
 					</Button>
 					<Button size={'sm'} colorScheme='facebook'>
