@@ -5,13 +5,16 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 import {
 	changeAvatarImage,
 	changeCoverImage,
+	checkIsExistUser,
 	checkUser,
 	createLessonReview,
 	findLessonReviews,
 	login,
 	logout,
 	register,
+	sendSmsRegister,
 	updateUserData,
+	verifyOTP,
 } from './user.action'
 import { UserInitialStateType } from './user.interface'
 
@@ -121,6 +124,36 @@ export const userSlice = createSlice({
 				state.isLoading = false
 			})
 			.addCase(createLessonReview.rejected, (state, action) => {
+				state.isLoading = false
+				state.error = action.payload
+			})
+			.addCase(sendSmsRegister.pending, state => {
+				state.isLoading = true
+			})
+			.addCase(sendSmsRegister.fulfilled, state => {
+				state.isLoading = false
+			})
+			.addCase(sendSmsRegister.rejected, (state, action) => {
+				state.isLoading = false
+				state.error = action.payload
+			})
+			.addCase(checkIsExistUser.pending, state => {
+				state.isLoading = true
+			})
+			.addCase(checkIsExistUser.fulfilled, state => {
+				state.isLoading = false
+			})
+			.addCase(checkIsExistUser.rejected, (state, action) => {
+				state.isLoading = false
+				state.error = action.payload
+			})
+			.addCase(verifyOTP.pending, state => {
+				state.isLoading = true
+			})
+			.addCase(verifyOTP.fulfilled, state => {
+				state.isLoading = false
+			})
+			.addCase(verifyOTP.rejected, (state, action) => {
 				state.isLoading = false
 				state.error = action.payload
 			})

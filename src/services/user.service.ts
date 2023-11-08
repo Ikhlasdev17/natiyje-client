@@ -1,4 +1,9 @@
-import { getAuthUrl, getCourseUrl, getUserUrl } from '@/api/api.constants'
+import {
+	getAuthUrl,
+	getCourseUrl,
+	getSmsUrl,
+	getUserUrl,
+} from '@/api/api.constants'
 import $axios, { axiosClassic } from '@/api/api.interceptor'
 import { removeTokensCookie, saveTokensCookie } from '@/helpers/auth.helper'
 import { UserType } from '@/interfaces/user.interface'
@@ -82,5 +87,29 @@ export const UserService = {
 
 		if (response.status !== 200) return null
 		return response.data
+	},
+	async sendSMSCodeRegister(phone: string) {
+		const response = await axiosClassic.post(getSmsUrl('send-otp'), {
+			phone,
+		})
+
+		return response
+	},
+
+	async checkIsExistUser(phone: string) {
+		const response = await axiosClassic.post(getAuthUrl('exist-user'), {
+			phone,
+		})
+
+		return response
+	},
+
+	async verifyOTP(otp: string, phone: string) {
+		const response = await axiosClassic.post(getSmsUrl('verify-otp'), {
+			phone: phone,
+			otpCode: otp,
+		})
+
+		return response
 	},
 }

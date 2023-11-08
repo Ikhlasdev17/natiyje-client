@@ -38,6 +38,7 @@
 		"react-drag-drop-files": "^2.3.10",
 		"react-froala-wysiwyg": "^4.1.2",
 		"react-icons": "^4.11.0",
+		"react-input-mask": "3.0.0-alpha.2",
 		"react-quill": "^2.0.0",
 		"react-redux": "^8.1.2",
 		"react-stars": "^2.2.5",
@@ -51,6 +52,7 @@
 		"@types/js-cookie": "^3.0.3",
 		"@types/nprogress": "^0.2.0",
 		"@types/react-draft-wysiwyg": "^1.13.4",
+		"@types/react-input-mask": "2.0.4",
 		"@types/react-stars": "^2.2.1"
 	}
 }

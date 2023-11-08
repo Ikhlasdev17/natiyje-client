@@ -8,15 +8,27 @@ import {
 	InterfacePhoneAndPassword,
 } from './user.interface'
 
+interface InterfaceEmailAndPasswordWithClbcs extends InterfaceEmailAndPassword {
+	callback: () => void
+	error: () => void
+}
+
 export const register = createAsyncThunk<
 	AuthUserResponse,
-	InterfaceEmailAndPassword
+	InterfaceEmailAndPasswordWithClbcs
 >('user/register', async (data, thunkAPI) => {
 	try {
 		const response = await UserService.register(data)
 
+		if (response.user) {
+			data.callback()
+		} else {
+			data.error()
+		}
+
 		return response
 	} catch (error) {
+		data.error()
 		return thunkAPI.rejectWithValue(error)
 	}
 })
@@ -140,6 +152,83 @@ export const createLessonReview = createAsyncThunk(
 			callback()
 			return response
 		} catch (error) {
+			return thunkAPI.rejectWithValue(error)
+		}
+	}
+)
+
+export const sendSmsRegister = createAsyncThunk(
+	'auth/send-sms',
+	async (
+		{
+			phone,
+			callback,
+			errorCallback,
+		}: { phone: string; callback: () => void; errorCallback: () => void },
+		thunkAPI
+	) => {
+		try {
+			const response = await UserService.sendSMSCodeRegister(phone)
+			if (response.status === 201 || response.status === 200) {
+				callback()
+			} else {
+				errorCallback()
+			}
+
+			return response
+		} catch (error) {
+			errorCallback()
+			return thunkAPI.rejectWithValue(error)
+		}
+	}
+)
+
+export const checkIsExistUser = createAsyncThunk(
+	'auth/check-isexist',
+	async (
+		body: { phone: string; callback: () => void; error: () => void },
+		thunkAPI
+	) => {
+		try {
+			const response = await UserService.checkIsExistUser(body.phone)
+
+			if (response.data.isExist) {
+				body.error()
+			} else {
+				body.callback()
+			}
+
+			return response
+		} catch (error) {
+			body.error()
+			return thunkAPI.rejectWithValue(error)
+		}
+	}
+)
+
+export const verifyOTP = createAsyncThunk(
+	'auth/verify-otp',
+	async (
+		body: {
+			phone: string
+			otp: string
+			callback: () => void
+			error: () => void
+		},
+		thunkAPI
+	) => {
+		try {
+			const response = await UserService.verifyOTP(body.otp, body.phone)
+
+			if (response.status === 201) {
+				body.callback()
+			} else {
+				body.error()
+			}
+
+			return response
+		} catch (error) {
+			body.error()
 			return thunkAPI.rejectWithValue(error)
 		}
 	}

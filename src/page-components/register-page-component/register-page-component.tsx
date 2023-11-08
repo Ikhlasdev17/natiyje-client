@@ -1,5 +1,7 @@
+import { RegisterSmsVerify } from '@/components'
 import TextField from '@/components/text-field/text-field'
 import { useActions } from '@/hooks/useActions'
+import { useTypedSelector } from '@/hooks/useTypedSelector'
 import { AuthValidators } from '@/validations/auth.validators'
 import {
 	Box,
@@ -14,27 +16,81 @@ import {
 } from '@chakra-ui/react'
 import { Form, Formik, FormikValues } from 'formik'
 import { useRouter } from 'next/router'
+import { useState } from 'react'
 
 const RegisterPageComponent = () => {
 	const router = useRouter()
-	const { register } = useActions()
+	const { register, sendSmsRegister, checkIsExistUser } = useActions()
+	const { isLoading } = useTypedSelector(state => state.user)
 	const toast = useToast()
+	const [registerValues, setRegisterValues] = useState<FormikValues>({})
+	const [registerScreenType, setRegisterScreenType] = useState<
+		'register' | 'verify'
+	>('register')
 
 	const onSubmit = (formikValues: FormikValues) => {
-		console.log(formikValues)
-		register({
-			fullName: formikValues.fullName,
+		setRegisterValues(formikValues)
+
+		checkIsExistUser({
 			phone: formikValues.phone,
-			password: formikValues.password,
+			callback() {
+				sendSmsVerification(formikValues)
+			},
+			error() {
+				toast({
+					title: 'Bul telefon nomeri arqali aldin dizimnen otilgen!',
+					status: 'info',
+					position: 'top',
+				})
+			},
 		})
+	}
 
-		toast({
-			title: 'Siz awmetli dizimnen ottiniz!',
-			status: 'success',
-			position: 'top',
+	const sendSmsVerification = (
+		formikValues: FormikValues | { phone: string }
+	) => {
+		sendSmsRegister({
+			phone: formikValues.phone.split('+').join(''),
+			callback() {
+				toast({
+					title: 'Telefoninizga jiberilgen kodti kiritin',
+					status: 'success',
+					position: 'top',
+				})
+				setRegisterScreenType('verify')
+			},
+			errorCallback() {
+				toast({
+					title: 'Qatelik juz berdi! Iltimas qayta urinip korin',
+					status: 'error',
+					position: 'top',
+				})
+			},
 		})
+	}
 
-		router.push('/')
+	const onRegister = () => {
+		register({
+			fullName: registerValues.fullName,
+			phone: registerValues.phone,
+			password: registerValues.password,
+			callback() {
+				toast({
+					title: 'Siz awmetli dizimnen ottiniz!',
+					status: 'success',
+					position: 'top',
+				})
+
+				router.push('/')
+			},
+			error() {
+				toast({
+					title: 'Qatelik juz berdi! Iltimas qayta urinip korin!',
+					status: 'warning',
+					position: 'top',
+				})
+			},
+		})
 	}
 
 	return (
@@ -46,6 +102,17 @@ const RegisterPageComponent = () => {
 				md: '100vh',
 			}}
 		>
+			<Box
+				pos={'absolute'}
+				w={'400px'}
+				h={'400px'}
+				rounded={'full'}
+				top={'-160px'}
+				left={'-100px'}
+				bg={'brand.500'}
+				zIndex={'-1'}
+				opacity={'.5'}
+			></Box>
 			<Flex
 				justifyContent={'space-between'}
 				zIndex={9999}
@@ -79,7 +146,7 @@ const RegisterPageComponent = () => {
 
 				<HStack spacing={'40px'}>
 					<Button variant={'link'} onClick={() => router.push('/login')}>
-						Sizde alleqashan akkount barma?
+						Kiriw
 					</Button>
 					<Button
 						display={{
@@ -157,52 +224,68 @@ const RegisterPageComponent = () => {
 					>
 						See how the world’s best user experiences are created
 					</Text>
-					<Formik
-						validationSchema={AuthValidators.register()}
-						initialValues={{
-							fullName: '',
-							phone: '',
-							password: '',
-						}}
-						onSubmit={onSubmit}
-					>
-						<Form>
-							<Stack>
-								<TextField
-									name='fullName'
-									label='At familiya'
-									placeholder='Jasur Bazarbaev'
-									type='text'
-								/>
-								<TextField
-									name='phone'
-									label='Telefon nomeri'
-									placeholder='+998953555020'
-									type='text'
-								/>
-								<TextField
-									name='password'
-									label='Parol'
-									placeholder='Parol'
-									type='password'
-								/>
-								<Button mt={'20px'} colorScheme='brand' h={14} type='submit'>
-									Dizimnen otiw
-								</Button>
-								<Button
-									mt={4}
-									display={{
-										base: 'block',
-										md: 'none',
-									}}
-									variant={'link'}
-									onClick={() => router.push('/login')}
-								>
-									Sizde alleqashan akkount barma?
-								</Button>
-							</Stack>
-						</Form>
-					</Formik>
+					{registerScreenType === 'register' ? (
+						<Formik
+							validationSchema={AuthValidators.register()}
+							initialValues={{
+								fullName: '',
+								phone: '',
+								password: '',
+							}}
+							onSubmit={onSubmit}
+						>
+							<Form>
+								<Stack>
+									<TextField
+										name='fullName'
+										label='At familiya'
+										placeholder='Jasur Bazarbaev'
+										type='text'
+									/>
+									<TextField
+										name='phone'
+										label='Telefon nomeri'
+										placeholder='+998905005050'
+										type='text'
+									/>
+									<TextField
+										name='password'
+										label='Parol'
+										placeholder='Parol'
+										type='password'
+									/>
+									<Button
+										isLoading={isLoading}
+										mt={'20px'}
+										colorScheme='brand'
+										h={14}
+										type='submit'
+									>
+										Dizimnen otiw
+									</Button>
+									<Button
+										mt={4}
+										display={{
+											base: 'block',
+											md: 'none',
+										}}
+										variant={'link'}
+										onClick={() => router.push('/login')}
+									>
+										Sizde alleqashan akkount barma?
+									</Button>
+								</Stack>
+							</Form>
+						</Formik>
+					) : (
+						<RegisterSmsVerify
+							phone={registerValues.phone}
+							onOk={onRegister}
+							reSendCode={sendSmsVerification}
+							registerScreenType={registerScreenType}
+							setRegisterScreenType={setRegisterScreenType}
+						/>
+					)}
 				</Box>
 			</Box>
 		</Box>
