@@ -101,7 +101,7 @@ const RegisterSmsVerify: FC<{
 					onClick={() => setRegisterScreenType('register')}
 					variant={'link'}
 				>
-					Telefon nomerin o'zgertiw
+					Telefon nomerin ozgertiw
 				</Button>
 			</Box>
 		</Box>

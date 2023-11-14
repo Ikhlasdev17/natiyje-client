@@ -39,7 +39,7 @@ const ProfileSidebar = () => {
 
 		const image = await FileService.uploadImage(files[0], 'user')
 		changeAvatarImage({
-			image: image.path as string,
+			image: image?.path as string,
 			callback() {
 				toast({
 					title: 'User avatar changed successful!',

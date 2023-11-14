@@ -279,7 +279,7 @@ const LoginPageComponent = () => {
 									onClick={() => setForgetScreenType('forget')}
 									variant={'link'}
 								>
-									Telefon nomerin o'zgertiw
+									Telefon nomerin ozgertiw
 								</Button>
 							</Box>
 						</>

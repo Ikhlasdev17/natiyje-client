@@ -123,6 +123,7 @@ const CourseDashboardMenu = () => {
 									// 		  )
 									// 		: false
 									// }
+									key={index}
 									display={'flex'}
 									alignItems={'center'}
 									w={'full'}

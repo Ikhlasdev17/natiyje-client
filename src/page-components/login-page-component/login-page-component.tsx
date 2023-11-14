@@ -213,7 +213,7 @@ const LoginPageComponent = () => {
 						variant={'link'}
 						onClick={() => router.push('/forget-password')}
 					>
-						Parolin'izdi umittin'izba?
+						Parolinizdi umittinizba?
 					</Button>
 				</Box>
 			</Box>

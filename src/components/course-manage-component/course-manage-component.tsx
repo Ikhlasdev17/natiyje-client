@@ -35,6 +35,7 @@ const CourseManageComponent: FC<CourseManagePropsType> = ({
 	const { fetchAllCategories } = useActions()
 	const { categories } = useTypedSelector(state => state.category)
 	const { isLoading } = useTypedSelector(state => state.course)
+	const color = useColorModeValue('gray.100', 'gray.500')
 
 	const onFileChange = (file: File) => {
 		setFile(file)
@@ -128,7 +129,9 @@ const CourseManageComponent: FC<CourseManagePropsType> = ({
 								>
 									<option value={''}>Kategoriyani saylan</option>
 									{categories.map(item => (
-										<option value={item._id}>{item.title}</option>
+										<option key={item?._id} value={item._id}>
+											{item.title}
+										</option>
 									))}
 								</Select>
 
@@ -237,7 +240,7 @@ const CourseManageComponent: FC<CourseManagePropsType> = ({
 									as={BsX}
 									rounded={'full'}
 									cursor={'pointer'}
-									bg={useColorModeValue('gray.100', 'gray.500')}
+									bg={color}
 									pos={'absolute'}
 									top={'-10px'}
 									right={'-10px'}
