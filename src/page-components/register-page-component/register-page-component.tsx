@@ -49,6 +49,7 @@ const RegisterPageComponent = () => {
 	const sendSmsVerification = (
 		formikValues: FormikValues | { phone: string }
 	) => {
+		setRegisterScreenType('verify')
 		sendSmsRegister({
 			phone: formikValues.phone.split('+').join(''),
 			callback() {
@@ -57,7 +58,6 @@ const RegisterPageComponent = () => {
 					status: 'success',
 					position: 'top',
 				})
-				setRegisterScreenType('verify')
 			},
 			errorCallback() {
 				toast({
@@ -65,6 +65,7 @@ const RegisterPageComponent = () => {
 					status: 'error',
 					position: 'top',
 				})
+				setRegisterScreenType('register')
 			},
 		})
 	}

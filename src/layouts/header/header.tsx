@@ -172,10 +172,7 @@ const Header = ({ colorScheme, color, pos }: HeaderProps) => {
 												border={'1px'}
 												borderColor={'green.500'}
 												objectFit={'cover'}
-												src={
-													loadImage(user.avatar || null) ||
-													'https://picsum.photos/200'
-												}
+												src={loadImage(user.avatar || null) || '/avatar.jpg'}
 											/>
 											<Text
 												display={{

@@ -1,5 +1,6 @@
 import TextField from '@/components/text-field/text-field'
 import { useActions } from '@/hooks/useActions'
+import { useTypedSelector } from '@/hooks/useTypedSelector'
 import { AuthValidators } from '@/validations/auth.validators'
 import {
 	Box,
@@ -18,6 +19,7 @@ import { useRouter } from 'next/router'
 const LoginPageComponent = () => {
 	const { login } = useActions()
 	const router = useRouter()
+	const { isLoading } = useTypedSelector(state => state.user)
 
 	const toast = useToast()
 
@@ -182,7 +184,13 @@ const LoginPageComponent = () => {
 									placeholder='Parol'
 									type='password'
 								/>
-								<Button mt={'20px'} colorScheme='brand' h={14} type='submit'>
+								<Button
+									isLoading={isLoading}
+									mt={'20px'}
+									colorScheme='brand'
+									h={14}
+									type='submit'
+								>
 									Kiriw
 								</Button>
 								<Button
@@ -199,6 +207,10 @@ const LoginPageComponent = () => {
 							</Stack>
 						</Form>
 					</Formik>
+
+					<Button mt={6} variant={'link'}>
+						Parolin'izdi umittin'izba?
+					</Button>
 				</Box>
 			</Box>
 		</Box>
