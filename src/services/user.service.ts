@@ -96,6 +96,14 @@ export const UserService = {
 		return response
 	},
 
+	async sendSmsCodeForgetPassword(phone: string) {
+		const response = await axiosClassic.post(getSmsUrl('send-otp-fp'), {
+			phone,
+		})
+
+		return response
+	},
+
 	async checkIsExistUser(phone: string) {
 		const response = await axiosClassic.post(getAuthUrl('exist-user'), {
 			phone,
@@ -108,6 +116,15 @@ export const UserService = {
 		const response = await axiosClassic.post(getSmsUrl('verify-otp'), {
 			phone: phone,
 			otpCode: otp,
+		})
+
+		return response
+	},
+
+	async changePassword(phone: string, password: string) {
+		const response = await axiosClassic.post(getAuthUrl('update-password'), {
+			phone,
+			password,
 		})
 
 		return response

@@ -1,3 +1,4 @@
+import { SmsVerify, UpdatePassword } from '@/components'
 import TextField from '@/components/text-field/text-field'
 import { useActions } from '@/hooks/useActions'
 import { useTypedSelector } from '@/hooks/useTypedSelector'
@@ -15,36 +16,92 @@ import {
 } from '@chakra-ui/react'
 import { Form, Formik, FormikValues } from 'formik'
 import { useRouter } from 'next/router'
+import { useEffect, useState } from 'react'
 
 const LoginPageComponent = () => {
-	const { login } = useActions()
+	const { sendSmsForgetPass, verifyOTP } = useActions()
 	const router = useRouter()
 	const { isLoading } = useTypedSelector(state => state.user)
-
+	const [forgetScreenType, setForgetScreenType] = useState<
+		'forget' | 'verify' | 'password'
+	>('forget')
 	const toast = useToast()
+	const [countDown, setCountDown] = useState(true)
+	const [minutes, setMinutes] = useState(1)
+	const [seconds, setSeconds] = useState(0)
+	const [phone, setPhone] = useState('')
 
 	const onSubmit = (formData: FormikValues) => {
-		login({
-			phone: formData.phone,
-			password: formData.password,
+		setPhone(formData.phone)
+		sendSmsForgetPass({
+			phone: formData.phone.split('+').join(''),
 			callback() {
 				toast({
-					title: 'Qaytqaninizdan quwanishlimiz :)',
+					title: "Telefonin'izg'a jiberilgen kodti kiritin!",
 					status: 'success',
 					position: 'top',
 				})
-
-				router.push('/')
+				setForgetScreenType('verify')
 			},
-			callbackError() {
+			errorCallback() {
 				toast({
-					title: 'Nomeriniz yaki paroliniz qate!',
-					status: 'error',
+					title: 'Qatelik juz berdi! Iltimas qayta urinip korin.',
+					status: 'warning',
+					position: 'top',
+				})
+				setForgetScreenType('forget')
+			},
+		})
+	}
+
+	const onVerify = (code: string) => {
+		verifyOTP({
+			phone: phone.split('+').join(''),
+			otp: code,
+			callback() {
+				toast({
+					title: "Jan'a parol kiritin!",
+					status: 'success',
+					position: 'top',
+				})
+				setForgetScreenType('password')
+			},
+			error() {
+				toast({
+					title: 'Kod qate kiritildi, qayta urinip korin!',
+					status: 'warning',
 					position: 'top',
 				})
 			},
 		})
 	}
+
+	useEffect(() => {
+		if (countDown) {
+			const count = setInterval(() => {
+				if (seconds !== 0) {
+					setSeconds(seconds - 1)
+				}
+
+				if (seconds === 0 && minutes !== 0) {
+					setMinutes(minutes - 1)
+					setSeconds(60)
+				}
+
+				if (seconds === 0 && minutes === 0) {
+					setCountDown(false)
+				}
+			}, 1000)
+
+			return () => clearInterval(count)
+		}
+	}, [countDown, seconds, minutes])
+
+	useEffect(() => {
+		setCountDown(true)
+		setMinutes(2)
+		setSeconds(0)
+	}, [forgetScreenType])
 
 	return (
 		<Box
@@ -150,7 +207,7 @@ const LoginPageComponent = () => {
 						}}
 						color={'textColor'}
 					>
-						Create your free account
+						Forget Password
 					</Heading>
 					<Text
 						color={'lightTextColor'}
@@ -162,59 +219,73 @@ const LoginPageComponent = () => {
 					>
 						See how the world’s best user experiences are created
 					</Text>
-					<Formik
-						validationSchema={AuthValidators.login()}
-						initialValues={{
-							phone: '',
-							password: '',
-						}}
-						onSubmit={onSubmit}
-					>
-						<Form>
-							<Stack>
-								<TextField
-									name='phone'
-									label='Telefon nomeri'
-									placeholder='+998953555020'
-									type='text'
-								/>
-								<TextField
-									name='password'
-									label='Parol'
-									placeholder='Parol'
-									type='password'
-								/>
+					{forgetScreenType === 'forget' ? (
+						<Formik
+							validationSchema={AuthValidators.forgetPass()}
+							initialValues={{
+								phone: '',
+							}}
+							onSubmit={onSubmit}
+						>
+							<Form>
+								<Stack>
+									<TextField
+										name='phone'
+										label='Telefon nomeri'
+										placeholder='+998953555020'
+										type='text'
+									/>
+									<Button
+										isLoading={isLoading}
+										mt={'20px'}
+										colorScheme='brand'
+										h={14}
+										type='submit'
+									>
+										Tastiyqlaw
+									</Button>
+								</Stack>
+							</Form>
+						</Formik>
+					) : forgetScreenType === 'verify' ? (
+						<>
+							<SmsVerify onChange={onVerify} />
+							<Box mt={12} gap={4}>
 								<Button
-									isLoading={isLoading}
-									mt={'20px'}
-									colorScheme='brand'
-									h={14}
-									type='submit'
-								>
-									Kiriw
-								</Button>
-								<Button
-									mt={4}
-									display={{
-										base: 'block',
-										md: 'none',
+									onClick={() => {
+										setCountDown(true)
+										setMinutes(1)
+										setSeconds(59)
+										onSubmit({ phone: phone })
 									}}
+									isDisabled={countDown}
 									variant={'link'}
-									onClick={() => router.push('/register')}
 								>
-									Dizimnen otiw
+									Qayta kod jiberiw{' '}
+									{minutes === 0 && seconds === 0
+										? null
+										: minutes < 10
+										? `0${minutes}`
+										: minutes}
+									{minutes === 0 && seconds === 0 ? null : ':'}
+									{minutes === 0 && seconds === 0
+										? null
+										: seconds < 10
+										? `0${seconds}`
+										: seconds}
 								</Button>
-							</Stack>
-						</Form>
-					</Formik>
-
-					<Button
-						mt={6}
-						variant={'link'}
-						onClick={() => router.push('/forget-password')}
-					>
-						Parolin'izdi umittin'izba?
-					</Button>
+								<br></br>
+								<Button
+									onClick={() => setForgetScreenType('forget')}
+									variant={'link'}
+								>
+									Telefon nomerin o'zgertiw
+								</Button>
+							</Box>
+						</>
+					) : (
+						<UpdatePassword phone={phone} />
+					)}
 				</Box>
 			</Box>
 		</Box>

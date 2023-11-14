@@ -1,3 +1,4 @@
+export { default as UpdatePassword } from './/update-password/update-password'
 export { default as AdminCourseItem } from './admin-course-item/admin-course-item'
 export { default as Container } from './container/container'
 export { default as CourseDashboardMain } from './course-dashboard-main/course-dashboard-main'

@@ -183,6 +183,32 @@ export const sendSmsRegister = createAsyncThunk(
 	}
 )
 
+export const sendSmsForgetPass = createAsyncThunk(
+	'auth/send-sms-forget-pass',
+	async (
+		{
+			phone,
+			callback,
+			errorCallback,
+		}: { phone: string; callback: () => void; errorCallback: () => void },
+		thunkAPI
+	) => {
+		try {
+			const response = await UserService.sendSmsCodeForgetPassword(phone)
+			if (response.status === 201 || response.status === 200) {
+				callback()
+			} else {
+				errorCallback()
+			}
+
+			return response
+		} catch (error) {
+			errorCallback()
+			return thunkAPI.rejectWithValue(error)
+		}
+	}
+)
+
 export const checkIsExistUser = createAsyncThunk(
 	'auth/check-isexist',
 	async (
@@ -221,6 +247,37 @@ export const verifyOTP = createAsyncThunk(
 			const response = await UserService.verifyOTP(body.otp, body.phone)
 
 			if (response.status === 201) {
+				body.callback()
+			} else {
+				body.error()
+			}
+
+			return response
+		} catch (error) {
+			body.error()
+			return thunkAPI.rejectWithValue(error)
+		}
+	}
+)
+
+export const updatePassword = createAsyncThunk(
+	'auth/update-password',
+	async (
+		body: {
+			phone: string
+			password: string
+			callback: () => void
+			error: () => void
+		},
+		thunkAPI
+	) => {
+		try {
+			const response = await UserService.changePassword(
+				body.phone,
+				body.password
+			)
+
+			if (response.status === 200) {
 				body.callback()
 			} else {
 				body.error()

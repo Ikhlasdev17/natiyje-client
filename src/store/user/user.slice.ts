@@ -12,7 +12,9 @@ import {
 	login,
 	logout,
 	register,
+	sendSmsForgetPass,
 	sendSmsRegister,
+	updatePassword,
 	updateUserData,
 	verifyOTP,
 } from './user.action'
@@ -154,6 +156,26 @@ export const userSlice = createSlice({
 				state.isLoading = false
 			})
 			.addCase(verifyOTP.rejected, (state, action) => {
+				state.isLoading = false
+				state.error = action.payload
+			})
+			.addCase(sendSmsForgetPass.pending, state => {
+				state.isLoading = true
+			})
+			.addCase(sendSmsForgetPass.fulfilled, state => {
+				state.isLoading = false
+			})
+			.addCase(sendSmsForgetPass.rejected, (state, action) => {
+				state.isLoading = false
+				state.error = action.payload
+			})
+			.addCase(updatePassword.pending, state => {
+				state.isLoading = true
+			})
+			.addCase(updatePassword.fulfilled, state => {
+				state.isLoading = false
+			})
+			.addCase(updatePassword.rejected, (state, action) => {
 				state.isLoading = false
 				state.error = action.payload
 			})

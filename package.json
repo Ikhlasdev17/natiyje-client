@@ -46,7 +46,8 @@
 		"recharts": "^2.8.0",
 		"redux": "^4.2.1",
 		"typescript": "5.2.2",
-		"yup": "^1.2.0"
+		"yup": "^1.2.0",
+		"yup-password": "^0.2.2"
 	},
 	"devDependencies": {
 		"@types/js-cookie": "^3.0.3",
