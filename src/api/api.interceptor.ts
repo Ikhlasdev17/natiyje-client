@@ -2,11 +2,11 @@ import { errorCatch } from '@/helpers/catchError'
 import axios from 'axios'
 import Cookies from 'js-cookie'
 
-export const API_URL = 'http://localhost:8000'
-// export const API_URL =
-// process.env.NODE_ENV === 'production'
-// 	? 'http://103.195.7.191:4000'
-// 	: 'http://localhost:8000'
+// export const API_URL = 'http://localhost:8000'
+export const API_URL =
+	process.env.NODE_ENV === 'production'
+		? 'http://103.195.7.191:4000'
+		: 'http://localhost:8000'
 
 export const axiosClassic = axios.create({
 	baseURL: API_URL,
