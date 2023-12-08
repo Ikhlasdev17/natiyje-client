@@ -32,9 +32,10 @@ const CourseManageComponent: FC<CourseManagePropsType> = ({
 }) => {
 	const [initialData, setInitialData] = useState(initialCourseData)
 	const [file, setFile] = useState<File | null | string>()
-	const { fetchAllCategories } = useActions()
+	const { fetchAllCategories, fetchStudents } = useActions()
 	const { categories } = useTypedSelector(state => state.category)
 	const { isLoading } = useTypedSelector(state => state.course)
+	const { students } = useTypedSelector(state => state.student)
 	const color = useColorModeValue('gray.100', 'gray.500')
 
 	const onFileChange = (file: File) => {
@@ -43,6 +44,8 @@ const CourseManageComponent: FC<CourseManagePropsType> = ({
 
 	const onSubmit = async (formikValues: FormikValues) => {
 		let data: any = {}
+
+		console.log(formikValues)
 
 		const slug = slugify(formikValues.title)
 
@@ -74,11 +77,12 @@ const CourseManageComponent: FC<CourseManagePropsType> = ({
 
 	useEffect(() => {
 		fetchAllCategories()
+		fetchStudents({ roles: ['INSTRUCTOR', 'CEO', 'ADMIN'] })
 	}, [])
 
 	useEffect(() => {
 		if (data) {
-			setInitialData(data)
+			setInitialData({ ...data, teacher: data?.teacher })
 			setFile(data.image)
 		}
 	}, [data])
@@ -112,35 +116,7 @@ const CourseManageComponent: FC<CourseManagePropsType> = ({
 									type='number'
 								/>
 							</Flex>
-							<Box my={3}>
-								<FormLabel mb={3}>
-									Category{' '}
-									<Box as={'span'} color={'red.300'}>
-										*
-									</Box>
-								</FormLabel>
 
-								<Select
-									onChange={e =>
-										formik.setFieldValue('category', e.target.value)
-									}
-									value={formik.values.category}
-									h={14}
-								>
-									<option value={''}>Kategoriyani saylan</option>
-									{categories.map(item => (
-										<option key={item?._id} value={item._id}>
-											{item.title}
-										</option>
-									))}
-								</Select>
-
-								{formik.errors.category && formik.touched.category && (
-									<Text mt={2} fontSize='14px' color='red.500'>
-										{formik.errors.category as string}
-									</Text>
-								)}
-							</Box>
 							<Flex gap={4}>
 								<TextAreaField
 									label='Excerpt'
@@ -148,6 +124,33 @@ const CourseManageComponent: FC<CourseManagePropsType> = ({
 									name='excerpt'
 								/>
 							</Flex>
+							<Box my={3}>
+								<FormLabel mb={3}>
+									Teacher{' '}
+									<Box as={'span'} color={'red.300'}>
+										*
+									</Box>
+								</FormLabel>
+
+								<Select
+									value={formik.values.teacher}
+									onChange={e =>
+										formik.setFieldValue('teacher', e.target.value)
+									}
+								>
+									{students.map(item => (
+										<option key={item._id} value={item._id}>
+											{item.fullName}
+										</option>
+									))}
+								</Select>
+
+								{formik.errors.teacher && formik.touched.teacher && (
+									<Text mt={2} fontSize='14px' color='red.500'>
+										{formik.errors.teacher as string}
+									</Text>
+								)}
+							</Box>
 
 							<Flex gap={4}>
 								<TagField
@@ -256,9 +259,6 @@ const CourseManageComponent: FC<CourseManagePropsType> = ({
 							h={14}
 							w={'full'}
 							my={4}
-							// onClick={() => {
-							// 	formik.submitForm()
-							// }}
 							isLoading={isLoading}
 						>
 							Submit

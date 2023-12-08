@@ -9,4 +9,5 @@ export const createCourseValidator = () =>
 		embedVideo: Yup.string()
 			.url('Video manzili qate korsetilgen!')
 			.required('Video url is required!'),
+		teacher: Yup.string().required('Teacher field is required!'),
 	})

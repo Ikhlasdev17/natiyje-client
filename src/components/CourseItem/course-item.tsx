@@ -71,18 +71,15 @@ const CourseItem: FC<CourseItemProps> = ({ course }) => {
 					{course?.title}
 				</Heading>
 				<Flex mt={'15px'} justify={'space-between'} alignItems={'center'}>
-					<HStack spacing={'14px'} align={'center'}>
+					<HStack spacing={'7px'} align={'center'}>
 						<Image
-							src={
-								loadImage(course.author?.avatar || '') ||
-								'https://picsum.photos/300'
-							}
+							src={loadImage(course.teacher?.avatar || '') || '/avatar.jpg'}
 							w={'40px'}
 							height={'40px'}
 							rounded={'full'}
 							objectFit={'cover'}
 						/>
-						<Text color={'lightTextColor'}>{course?.author?.fullName}</Text>
+						<Text color={'lightTextColor'}>{course?.teacher?.fullName}</Text>
 					</HStack>
 
 					<HStack>

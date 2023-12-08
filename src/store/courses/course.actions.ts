@@ -196,6 +196,8 @@ export const updateCourse = createAsyncThunk(
 	) => {
 		try {
 			const section = await CourseService.updateCourse(course)
+			console.log(section)
+
 			callback()
 			return section
 		} catch (error) {

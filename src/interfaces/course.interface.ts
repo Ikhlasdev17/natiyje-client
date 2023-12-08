@@ -20,6 +20,7 @@ export interface CourseType {
 	sections?: SectionType[]
 	embedVideo: ''
 	slug?: string
+	teacher: any
 }
 
 export interface Author {

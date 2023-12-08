@@ -26,6 +26,7 @@ const UpdateCoursePageComponent = () => {
 				tags: formikValues.tags,
 				_id: formikValues._id,
 				category: formikValues.category,
+				teacher: formikValues.teacher,
 			} as CourseType,
 			callback() {
 				toast({
@@ -36,7 +37,6 @@ const UpdateCoursePageComponent = () => {
 				router.push('/admin-page/courses')
 			},
 		})
-		console.log(course)
 	}
 
 	return (

@@ -1,10 +1,12 @@
 import { getUserUrl } from '@/api/api.constants'
 import $axios from '@/api/api.interceptor'
-import { UserType } from '@/interfaces/user.interface'
+import { RoleUser, UserType } from '@/interfaces/user.interface'
 
 export const StudentsService = {
-	async getStudents() {
-		const response = await $axios.get<UserType[]>(getUserUrl('students'))
+	async getStudents(roles: RoleUser[] = ['USER']) {
+		const response = await $axios.get<UserType[]>(
+			getUserUrl(`all?roles=${roles.join('|')}`)
+		)
 		return response.data
 	},
 }

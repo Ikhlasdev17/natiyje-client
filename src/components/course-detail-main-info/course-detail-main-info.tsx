@@ -46,7 +46,7 @@ const CourseDetailMainInfo: FC<BoxProps> = ({ ...props }) => {
 				color={'#5F5982'}
 				fontSize={{
 					base: '18px',
-					md: '24px',
+					md: '19px',
 				}}
 				fontWeight={'400'}
 				mb={'20px'}
