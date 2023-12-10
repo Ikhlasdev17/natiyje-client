@@ -17,3 +17,10 @@ export const reviewLessonValidator = () =>
 			.required('Sabaq ushin neshe ball beresiz?'),
 		text: yup.string().required('Iltimas, pikirinizdi jazin!'),
 	})
+
+export const createUserValidator = () =>
+	yup.object({
+		phone: yup.string().required('Telefon nomerin kiritin!'),
+		fullName: yup.string().required('FIO ni kiritin!'),
+		role: yup.string().required('Role di kiritin!'),
+	})

@@ -9,6 +9,7 @@ export { default as CourseDetailMainInfo } from './course-detail-main-info/cours
 export { default as CourseDetailOverview } from './course-detail-overview/course-detail-overview'
 export { default as CourseDetailReviews } from './course-detail-reviews/course-detail-reviews'
 export { default as CourseDetailTabs } from './course-detail-tabs/course-detail-tabs'
+export { default as CreateUserForm } from './create-user-form/create-user-form'
 export { default as DashboardInstructors } from './dashboard-instructors/dashboard-instructors'
 export { default as HomeBanner } from './home-banner/home-banner'
 export { default as LessonAccordion } from './lesson-accordion-item/lesson-accordion'

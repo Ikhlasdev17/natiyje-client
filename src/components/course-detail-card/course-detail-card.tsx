@@ -1,4 +1,5 @@
 import { loadImage } from '@/helpers/load-image'
+import { useActions } from '@/hooks/useActions'
 import { useTypedSelector } from '@/hooks/useTypedSelector'
 import {
 	Box,
@@ -8,9 +9,13 @@ import {
 	Heading,
 	Icon,
 	Image,
+	Modal,
+	ModalContent,
+	ModalOverlay,
 	Stack,
 	Text,
 	useDisclosure,
+	useToast,
 } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import {
@@ -27,13 +32,35 @@ import { BiDesktop } from 'react-icons/bi'
 import { BsCheck2Circle } from 'react-icons/bs'
 import { HiLanguage } from 'react-icons/hi2'
 import CourseDetailMainInfo from '../course-detail-main-info/course-detail-main-info'
-import EmbedVideoModal from '../embed-video-modal/embed-video-modal'
 
 const CourseDetailCard = () => {
 	const { isOpen, onOpen, onClose } = useDisclosure()
 	const { course } = useTypedSelector(state => state.course)
 	const { user } = useTypedSelector(state => state.user)
+	const { enrollCourse } = useActions()
 	const router = useRouter()
+	const toast = useToast()
+
+	const enroll = () => {
+		enrollCourse({
+			courseId: course?._id as string,
+			callback() {
+				toast({
+					title: 'Kursti satip aldiniz!',
+					status: 'success',
+					position: 'top',
+				})
+				router.reload()
+			},
+			errorCallback() {
+				toast({
+					title: 'Qatelik juz berdi qayta urinip korin!',
+					status: 'error',
+					position: 'top',
+				})
+			},
+		})
+	}
 
 	return (
 		<Box
@@ -47,12 +74,26 @@ const CourseDetailCard = () => {
 			}}
 			p={5}
 		>
-			<EmbedVideoModal
-				isOpen={isOpen}
-				onOpen={onOpen}
-				onClose={onClose}
-				embedVideo={course?.embedVideo}
-			/>
+			<Modal onClose={onClose} isOpen={isOpen} isCentered size={'4xl'}>
+				<ModalOverlay />
+				<ModalContent
+					m={{
+						base: 4,
+						lg: 0,
+					}}
+					p={0}
+				>
+					<Box
+						w={'100%'}
+						as='iframe'
+						minH={'400px'}
+						src={`https://www.youtube.com/embed/${
+							course?.embedVideo.split('https://youtu.be/')[1]
+						}`}
+						allowFullScreen
+					></Box>
+				</ModalContent>
+			</Modal>
 
 			<Box
 				pos={'relative'}
@@ -102,7 +143,7 @@ const CourseDetailCard = () => {
 
 			{user ? (
 				user?.courses?.findIndex(item => item._id === course?._id) === -1 ? (
-					<Button colorScheme='brand' w={'full'} h={12}>
+					<Button onClick={enroll} colorScheme='green' w={'full'} h={12}>
 						Hazir satip aliw
 					</Button>
 				) : (

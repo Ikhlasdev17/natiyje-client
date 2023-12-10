@@ -1,7 +1,7 @@
 import { UserType } from '@/interfaces/user.interface'
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
-import { fetchStudents } from './students.actions'
-import { StudentsInitialStateType } from './students.interface'
+import { fetchStudents } from './users.actions'
+import { StudentsInitialStateType } from './users.interface'
 
 export const initialState: StudentsInitialStateType = {
 	students: [],

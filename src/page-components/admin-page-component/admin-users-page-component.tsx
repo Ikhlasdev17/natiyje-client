@@ -1,11 +1,18 @@
+import { CreateUserForm } from '@/components'
 import UsersSkeletonTable from '@/components/users-skeleton-table/users-skeleton-table'
 import { loadImage } from '@/helpers/load-image'
 import { useActions } from '@/hooks/useActions'
 import { useTypedSelector } from '@/hooks/useTypedSelector'
-import { RoleUser } from '@/interfaces/user.interface'
+import { CreateUserType, RoleUser } from '@/interfaces/user.interface'
 import {
 	Box,
 	Button,
+	Drawer,
+	DrawerBody,
+	DrawerCloseButton,
+	DrawerContent,
+	DrawerHeader,
+	DrawerOverlay,
 	Flex,
 	HStack,
 	Image,
@@ -21,6 +28,8 @@ import {
 	Th,
 	Thead,
 	Tr,
+	useDisclosure,
+	useToast,
 } from '@chakra-ui/react'
 import { Select } from 'antd'
 import moment from 'moment'
@@ -28,14 +37,43 @@ import { useEffect, useState } from 'react'
 import { BiSolidEdit } from 'react-icons/bi'
 import { BsList, BsPlus, BsSend, BsTrash } from 'react-icons/bs'
 
-const AdminStudentsPageComponent = () => {
+const AdminUsersPageComponent = () => {
 	const { students, isLoading } = useTypedSelector(state => state.student)
-	const { fetchStudents } = useActions()
+	const { fetchStudents, createUserAction } = useActions()
 	const [role, setRole] = useState<[RoleUser]>(['USER'])
+	const { isOpen, onOpen, onClose } = useDisclosure()
+	const [updatingUserData, setUpdatingUserData] =
+		useState<CreateUserType | null>(null)
+	const [selectedUserId, setSelectedUserId] = useState<string | null>(null)
+	const toast = useToast()
 
 	useEffect(() => {
 		fetchStudents({ roles: role })
 	}, [role])
+
+	const onCompleteUserForm = (userData: CreateUserType) => {
+		if (!updatingUserData) {
+			createUserAction({
+				...userData,
+				callback() {
+					onClose()
+					toast({
+						title: 'User successfull created!',
+						status: 'success',
+						position: 'top',
+					})
+					fetchStudents({ roles: role })
+				},
+				errorCallback(message: string) {
+					toast({
+						title: message ?? 'Error with create user! Please try again!',
+						status: 'error',
+						position: 'top',
+					})
+				},
+			})
+		}
+	}
 
 	return (
 		<Box>
@@ -56,7 +94,15 @@ const AdminStudentsPageComponent = () => {
 					</Select>
 				</HStack>
 
-				<Button rightIcon={<BsPlus />}>Add student</Button>
+				<Button
+					onClick={() => {
+						onOpen()
+						setUpdatingUserData(null)
+					}}
+					rightIcon={<BsPlus />}
+				>
+					Add student
+				</Button>
 			</Flex>
 
 			<TableContainer>
@@ -119,6 +165,10 @@ const AdminStudentsPageComponent = () => {
 												</MenuButton>
 												<MenuList>
 													<MenuItem
+														onClick={() => {
+															onOpen()
+															setUpdatingUserData(item as CreateUserType)
+														}}
 														icon={
 															<BiSolidEdit fontSize={'18px'} color='gray.300' />
 														}
@@ -148,8 +198,23 @@ const AdminStudentsPageComponent = () => {
 					</Table>
 				)}
 			</TableContainer>
+
+			<Drawer isOpen={isOpen} placement='right' onClose={onClose} size={'sm'}>
+				<DrawerOverlay />
+				<DrawerContent>
+					<DrawerCloseButton />
+					<DrawerHeader>Create new user</DrawerHeader>
+
+					<DrawerBody>
+						<CreateUserForm
+							onComplete={onCompleteUserForm}
+							updatingUserData={updatingUserData}
+						/>
+					</DrawerBody>
+				</DrawerContent>
+			</Drawer>
 		</Box>
 	)
 }
 
-export default AdminStudentsPageComponent
+export default AdminUsersPageComponent

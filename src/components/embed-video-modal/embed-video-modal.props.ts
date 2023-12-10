@@ -1,7 +1,5 @@
-import { ReactNode } from 'react'
-
 export interface EmbedVideoModalPropsType {
-	embedVideo: ReactNode
+	embedVideo: string
 	onClose: () => void
 	onOpen: () => void
 	isOpen: boolean

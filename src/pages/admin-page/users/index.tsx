@@ -1,11 +1,11 @@
 import useAdminRedirect from '@/hooks/useAdminRedirect'
 import { withAdminLayout } from '@/layouts/admin-layout'
-import { AdminStudentsPageComponent } from '@/page-components'
+import { AdminUsersPageComponent } from '@/page-components'
 import { GetServerSideProps } from 'next'
 
 const Students = () => {
 	useAdminRedirect()
-	return <AdminStudentsPageComponent />
+	return <AdminUsersPageComponent />
 }
 
 export default withAdminLayout(Students)

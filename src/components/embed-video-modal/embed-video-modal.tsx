@@ -1,4 +1,4 @@
-import { Box, Modal, ModalContent, ModalOverlay } from '@chakra-ui/react'
+import { Modal, ModalContent, ModalOverlay } from '@chakra-ui/react'
 import { FC } from 'react'
 import { EmbedVideoModalPropsType } from './embed-video-modal.props'
 
@@ -8,6 +8,8 @@ const EmbedVideoModal: FC<EmbedVideoModalPropsType> = ({
 	onOpen,
 	embedVideo,
 }) => {
+	console.log(embedVideo)
+
 	return (
 		<>
 			<Modal onClose={onClose} isOpen={isOpen} isCentered size={'4xl'}>
@@ -19,7 +21,23 @@ const EmbedVideoModal: FC<EmbedVideoModalPropsType> = ({
 					}}
 					p={0}
 				>
-					<Box w={'100%'}> {embedVideo}</Box>
+					<iframe
+						width='424'
+						height='238'
+						src={`https://www.youtube.com/embed/${
+							typeof embedVideo === 'string'
+								? embedVideo.split('https://youtu.be/')[0]
+								: ''
+						}`}
+						title='Javascript toliq kurs |  14-sabaq. DOM. Elementlerdi select qiliw.'
+						allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
+					></iframe>
+					{/* <Box
+						w={'100%'}
+						as='iframe'
+						h={'400px'}
+						src={`https://www.youtube.com/embed/${.split('')}`}
+					></Box> */}
 				</ModalContent>
 			</Modal>
 		</>

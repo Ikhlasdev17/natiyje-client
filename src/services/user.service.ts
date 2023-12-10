@@ -6,7 +6,7 @@ import {
 } from '@/api/api.constants'
 import $axios, { axiosClassic } from '@/api/api.interceptor'
 import { removeTokensCookie, saveTokensCookie } from '@/helpers/auth.helper'
-import { UserType } from '@/interfaces/user.interface'
+import { CreateUserType, UserType } from '@/interfaces/user.interface'
 import Cookies from 'js-cookie'
 import {
 	AuthUserResponse,
@@ -128,5 +128,13 @@ export const UserService = {
 		})
 
 		return response
+	},
+
+	async createUserByAdmin(userData: CreateUserType) {
+		return $axios.post(getUserUrl(`create-user`), userData)
+	},
+
+	async enrollCourse(courseId: string) {
+		return $axios.post(getUserUrl(`enroll-course/${courseId}`))
 	},
 }

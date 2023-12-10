@@ -74,8 +74,8 @@ const CourseDashboardMenu = () => {
 					})
 				})
 			} else {
-				if (currentCourse.sections && currentCourse.sections[0].lessons) {
-					currLesson = currentCourse.sections[0].lessons[0]
+				if (currentCourse?.sections && currentCourse.sections[0]?.lessons) {
+					currLesson = currentCourse?.sections[0]?.lessons[0]
 				}
 			}
 		}

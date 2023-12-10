@@ -5,7 +5,10 @@ import axios from 'axios'
 export const FileService = {
 	async uploadVideo(video: File, folderId: string = '36850') {
 		const formData = new FormData()
-		formData.append('vooKey', 'jZREExXWSTf41KvoqVFE2EqB0')
+		formData.append(
+			'vooKey',
+			process.env.NEXT_PUBLIC_VIDEO_UPLOAD_KEY as string
+		)
 		formData.append('name', 'Upload from API')
 		formData.append('customS3', '0')
 		formData.append('videoGroup', folderId)
@@ -19,7 +22,7 @@ export const FileService = {
 	async getVideoProjects() {
 		const response = await axios.get('https://api.spotlightr.com/groups', {
 			params: {
-				vooKey: 'jZREExXWSTf41KvoqVFE2EqB0',
+				vooKey: process.env.NEXT_PUBLIC_VIDEO_UPLOAD_KEY as string,
 			},
 		})
 		return response.data

@@ -32,3 +32,10 @@ export interface Author {
 }
 
 export type RoleUser = 'CEO' | 'INSTRUCTOR' | 'ADMIN' | 'USER'
+
+export interface CreateUserType {
+	fullName: string
+	password: string
+	role: RoleUser
+	phone: string
+}

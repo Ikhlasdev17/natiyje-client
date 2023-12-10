@@ -1,4 +1,9 @@
-import { LessonReviewType, UserType } from '@/interfaces/user.interface'
+import { errorCatch } from '@/helpers/catchError'
+import {
+	CreateUserType,
+	LessonReviewType,
+	UserType,
+} from '@/interfaces/user.interface'
 import { LessonService } from '@/services/lesson.service'
 import { UserService } from '@/services/user.service'
 import { createAsyncThunk } from '@reduxjs/toolkit'
@@ -287,6 +292,61 @@ export const updatePassword = createAsyncThunk(
 		} catch (error) {
 			body.error()
 			return thunkAPI.rejectWithValue(error)
+		}
+	}
+)
+
+interface CreateUserActionType extends CreateUserType {
+	callback: (userId?: string) => void
+	errorCallback: (error: string) => void
+}
+
+export const createUserAction = createAsyncThunk<
+	'Success',
+	CreateUserActionType
+>('user/create-by-admin', async (userData, thunkAPI) => {
+	return await UserService.createUserByAdmin(userData)
+		.then(response => {
+			if (response && (response?.status === 200 || response?.status === 201)) {
+				userData.callback(response.data._id)
+				return response.data
+			} else {
+				userData.errorCallback('Error or user already exist!')
+				return thunkAPI.rejectWithValue('Error')
+			}
+		})
+		.catch(error => {
+			console.log(error.response.data.message)
+			userData.errorCallback(errorCatch(error.response.data.error))
+		})
+})
+
+export const enrollCourse = createAsyncThunk(
+	'user/enroll-course',
+	async (
+		{
+			courseId,
+			callback,
+			errorCallback,
+		}: {
+			courseId: string
+			callback: () => void
+			errorCallback: () => void
+		},
+		thunkApi
+	) => {
+		try {
+			const response = await UserService.enrollCourse(courseId)
+
+			if ((response && response.status === 200) || response.status === 201) {
+				callback()
+				return response.data
+			} else {
+				errorCallback()
+			}
+		} catch (error) {
+			errorCallback()
+			return thunkApi.rejectWithValue(error)
 		}
 	}
 )

@@ -3,6 +3,7 @@ import { loadImage } from '@/helpers/load-image'
 import { useActions } from '@/hooks/useActions'
 import { useAuth } from '@/hooks/useAuth'
 import {
+	Badge,
 	Box,
 	Button,
 	Flex,
@@ -206,9 +207,16 @@ const Header = ({ colorScheme, color, pos }: HeaderProps) => {
 											as={Flex}
 											alignItems={'center'}
 											gap={2}
+											onClick={() => {
+												router.push('/enrolled-courses')
+											}}
 										>
 											<BsGrid fontSize={'16px'} />
-											Kurslarim
+											Kurslarim{' '}
+											<Badge colorScheme='green' rounded={'full'}>
+												{' '}
+												({user.courses?.length})
+											</Badge>
 										</MenuItem>
 										{user.role !== 'USER' ? (
 											<MenuItem

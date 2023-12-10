@@ -235,3 +235,52 @@ export const closeLesson = createAsyncThunk<
 		return thunkAPI.rejectWithValue(error)
 	}
 })
+
+export const courseStudentsAction = createAsyncThunk(
+	'course/students',
+	async ({ courseId }: { courseId: string }, thunkApi) => {
+		try {
+			const response = await CourseService.courseStudents(courseId)
+
+			return response
+		} catch (error) {
+			return thunkApi.rejectWithValue(error)
+		}
+	}
+)
+
+export const addStudentToCourseAction = createAsyncThunk(
+	'course/add-student',
+	async (
+		{
+			courseId,
+			studentId,
+			callback,
+			errorCallback,
+		}: {
+			courseId: string
+			studentId: string
+			callback: () => void
+			errorCallback: () => void
+		},
+		thunkApi
+	) => {
+		try {
+			const response = await CourseService.addStudentToCourse(
+				courseId,
+				studentId
+			)
+
+			if (response) {
+				callback()
+			} else {
+				errorCallback()
+			}
+
+			return response
+		} catch (error) {
+			errorCallback()
+			return thunkApi.rejectWithValue(error)
+		}
+	}
+)

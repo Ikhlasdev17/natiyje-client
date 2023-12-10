@@ -24,6 +24,7 @@ import {
 import { useRouter } from 'next/router'
 import { useRef, useState } from 'react'
 import { BsList, BsPen, BsTrash } from 'react-icons/bs'
+import { FaUsers } from 'react-icons/fa'
 
 const AdminCourseItem = ({ course }: { course: CourseType }) => {
 	const router = useRouter()
@@ -113,6 +114,16 @@ const AdminCourseItem = ({ course }: { course: CourseType }) => {
 						onClick={() => router.push(`/admin-page/curriculum/${course._id}`)}
 					>
 						Curriculum
+					</Button>
+					<Button
+						colorScheme='facebook'
+						size={'sm'}
+						rightIcon={<FaUsers />}
+						onClick={() =>
+							router.push(`/admin-page/course-students/${course._id}`)
+						}
+					>
+						Students
 					</Button>
 				</HStack>
 				<Button

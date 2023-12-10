@@ -51,7 +51,7 @@ const CourseDetailMainInfo: FC<BoxProps> = ({ ...props }) => {
 				fontWeight={'400'}
 				mb={'20px'}
 			>
-				{course?.excerpt}
+				{course?.excerpt?.slice(0, 300) + '...'}
 			</Text>
 			<Flex
 				gap={'24px'}

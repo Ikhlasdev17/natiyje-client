@@ -1,6 +1,7 @@
 import { getCourseUrl } from '@/api/api.constants'
 import $axios, { axiosClassic } from '@/api/api.interceptor'
 import { CourseType } from '@/interfaces/course.interface'
+import { UserType } from '@/interfaces/user.interface'
 
 export const CourseService = {
 	async fetchAll() {
@@ -41,5 +42,19 @@ export const CourseService = {
 			course
 		)
 		return response
+	},
+	async courseStudents(courseId: string): Promise<UserType[]> {
+		const response = await $axios.get<UserType[]>(
+			getCourseUrl(`course-students/${courseId}`)
+		)
+
+		return response.data
+	},
+	async addStudentToCourse(courseId: string, studentId: string) {
+		const response = await $axios.post(
+			getCourseUrl(`add-students/${courseId}/${studentId}`)
+		)
+
+		return response.data
 	},
 }

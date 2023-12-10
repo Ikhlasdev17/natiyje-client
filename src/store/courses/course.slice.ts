@@ -1,7 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit'
 import {
+	addStudentToCourseAction,
 	changeLessonPosition,
 	closeLesson,
+	courseStudentsAction,
 	createCourse,
 	createLesson,
 	createSection,
@@ -19,6 +21,7 @@ export const initialState: CourseInitialStateProps = {
 	error: null,
 	sections: [],
 	course: null,
+	courseStudents: [],
 }
 
 export const courseSlice = createSlice({
@@ -123,6 +126,25 @@ export const courseSlice = createSlice({
 				state.isLoading = false
 			})
 			.addCase(closeLesson.rejected, state => {
+				state.isLoading = false
+			})
+			.addCase(courseStudentsAction.pending, state => {
+				state.isLoading = true
+			})
+			.addCase(courseStudentsAction.fulfilled, (state, action) => {
+				state.isLoading = false
+				state.courseStudents = action.payload
+			})
+			.addCase(courseStudentsAction.rejected, state => {
+				state.isLoading = false
+			})
+			.addCase(addStudentToCourseAction.pending, state => {
+				state.isLoading = true
+			})
+			.addCase(addStudentToCourseAction.fulfilled, (state, action) => {
+				state.isLoading = false
+			})
+			.addCase(addStudentToCourseAction.rejected, state => {
 				state.isLoading = false
 			})
 	},

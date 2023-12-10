@@ -8,6 +8,8 @@ import {
 	checkIsExistUser,
 	checkUser,
 	createLessonReview,
+	createUserAction,
+	enrollCourse,
 	findLessonReviews,
 	login,
 	logout,
@@ -176,6 +178,26 @@ export const userSlice = createSlice({
 				state.isLoading = false
 			})
 			.addCase(updatePassword.rejected, (state, action) => {
+				state.isLoading = false
+				state.error = action.payload
+			})
+			.addCase(createUserAction.pending, state => {
+				state.isLoading = true
+			})
+			.addCase(createUserAction.fulfilled, state => {
+				state.isLoading = false
+			})
+			.addCase(createUserAction.rejected, (state, action) => {
+				state.isLoading = false
+				state.error = action.payload
+			})
+			.addCase(enrollCourse.pending, state => {
+				state.isLoading = true
+			})
+			.addCase(enrollCourse.fulfilled, state => {
+				state.isLoading = false
+			})
+			.addCase(enrollCourse.rejected, (state, action) => {
 				state.isLoading = false
 				state.error = action.payload
 			})
