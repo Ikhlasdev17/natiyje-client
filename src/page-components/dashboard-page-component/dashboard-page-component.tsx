@@ -15,7 +15,13 @@ const DashboardPageComponent = () => {
 	return (
 		<Box minHeight={'100vh'} bg={'#F6F7FB'}>
 			{!sections ? (
-				<Container>
+				<Container
+					w={{
+						base: '90%',
+						md: '90%',
+						lg: '90%',
+					}}
+				>
 					<Box
 						w={'full'}
 						minH={'200px'}

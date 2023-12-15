@@ -12,4 +12,5 @@ export { default as EnrolledCoursePageComponent } from './enrolled-course-page-c
 export { default as ForgetPasswordPageComponent } from './forget-password-page-component/forget-password-page-component'
 export { default as HomePageComponent } from './home-page-component/home-page-component'
 export { default as InstructorPageComponent } from './instructors-page-component/instructors-page-component'
+export { default as PaymentPageComponent } from './payment-page-component/payment-page-component'
 export { default as ProfilePageComponent } from './profile-page-component/profile-page-component'

@@ -7,5 +7,6 @@ export const getSectionUrl = (url: string) => `/api/section/${url}`
 export const getLessonUrl = (url: string) => `/api/lesson/${url}`
 export const getStudentUrl = (url: string) => `/api/student/${url}`
 export const getSmsUrl = (url: string) => `/api/sms/${url}`
+export const getCouponUrl = (url: string) => `/api/coupon/${url}`
 export const getCreateVideoUrl = () =>
 	`https://api.spotlightr.com/api/createVideo`

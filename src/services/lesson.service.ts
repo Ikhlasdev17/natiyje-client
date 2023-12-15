@@ -44,4 +44,9 @@ export const LessonService = {
 
 		return response
 	},
+	async completeLesson(lessonId: string) {
+		const response = await $axios.put(getLessonUrl(`complete/${lessonId}`))
+
+		return response
+	},
 }

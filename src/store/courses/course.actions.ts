@@ -284,3 +284,30 @@ export const addStudentToCourseAction = createAsyncThunk(
 		}
 	}
 )
+
+export const completeLesson = createAsyncThunk(
+	'lesson/complete',
+	async (
+		{
+			lessonId,
+			callback,
+			errorCallback,
+		}: { lessonId: string; callback: () => void; errorCallback: () => void },
+		thunkApi
+	) => {
+		try {
+			const response = await LessonService.completeLesson(lessonId)
+
+			if (response.status == 200) {
+				callback()
+			} else {
+				errorCallback()
+			}
+
+			return response.data
+		} catch (error) {
+			errorCallback()
+			return thunkApi.rejectWithValue(error)
+		}
+	}
+)

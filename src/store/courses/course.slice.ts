@@ -3,6 +3,7 @@ import {
 	addStudentToCourseAction,
 	changeLessonPosition,
 	closeLesson,
+	completeLesson,
 	courseStudentsAction,
 	createCourse,
 	createLesson,
@@ -145,6 +146,15 @@ export const courseSlice = createSlice({
 				state.isLoading = false
 			})
 			.addCase(addStudentToCourseAction.rejected, state => {
+				state.isLoading = false
+			})
+			.addCase(completeLesson.pending, state => {
+				state.isLoading = true
+			})
+			.addCase(completeLesson.fulfilled, (state, action) => {
+				state.isLoading = false
+			})
+			.addCase(completeLesson.rejected, state => {
 				state.isLoading = false
 			})
 	},

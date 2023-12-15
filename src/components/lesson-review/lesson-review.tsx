@@ -7,6 +7,7 @@ import {
 	Button,
 	Divider,
 	Flex,
+	Icon,
 	Image,
 	Stack,
 	Text,
@@ -16,9 +17,10 @@ import {
 import moment from 'moment'
 import { useEffect, useState } from 'react'
 import { BsSend } from 'react-icons/bs'
+import { FaTrash } from 'react-icons/fa'
 import ReactStars from 'react-stars'
 const LessonReview = () => {
-	const { lesson, lessonReviews, isLoading } = useTypedSelector(
+	const { lesson, lessonReviews, isLoading, user } = useTypedSelector(
 		state => state.user
 	)
 	const { findLessonReviews, createLessonReview } = useActions()
@@ -97,7 +99,7 @@ const LessonReview = () => {
 								h={'42px'}
 								rounded={'full'}
 								objectFit={'cover'}
-								src={loadImage(item.author?.avatar || null) || ''}
+								src={loadImage(item.author?.avatar || null) || './avatar.jpg'}
 							/>
 							<Box>
 								<Text fontSize={'16px'} fontWeight={'bold'} color={'gray.600'}>
@@ -108,7 +110,19 @@ const LessonReview = () => {
 								</Text>
 							</Box>
 						</Flex>
-						<ReactStars value={item.rate} edit={false} size={18} />
+						<Flex alignItems={'center'} gap={3}>
+							{item.author?._id === user?._id ? (
+								<Icon
+									cursor={'pointer'}
+									_hover={{
+										color: 'red.500',
+									}}
+									color={'gray.600'}
+									as={FaTrash}
+								/>
+							) : null}
+							<ReactStars value={item.rate} edit={false} size={18} />
+						</Flex>
 					</Flex>
 					<Divider my={4} />
 					<Text>{item.text}</Text>
