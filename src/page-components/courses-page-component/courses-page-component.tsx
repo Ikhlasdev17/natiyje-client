@@ -2,10 +2,8 @@ import { Container, SectionOverlay } from '@/components'
 import CourseItem from '@/components/CourseItem/course-item'
 import { useTypedSelector } from '@/hooks/useTypedSelector'
 import {
-	Box,
 	Grid,
 	GridItem,
-	Heading,
 	Tab,
 	TabList,
 	TabPanel,
@@ -19,18 +17,6 @@ const CoursesPageComponent = () => {
 	return (
 		<>
 			<SectionOverlay />
-			<Box w={'full'} py={'80px'}>
-				<Container
-					display={'flex'}
-					alignItems={'center'}
-					flexDir={'column'}
-					justifyContent={'center'}
-				>
-					<Heading color={'textColor'} fontWeight={'500'} fontSize={'24px'}>
-						Kurslar
-					</Heading>
-				</Container>
-			</Box>
 
 			<Container>
 				<>

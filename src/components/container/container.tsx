@@ -10,6 +10,7 @@ const Container: FC<ContainerPropsType> = ({ children, ...props }) => {
 				md: '90%',
 				lg: '80%',
 			}}
+			maxW={'1440px'}
 			mx={'auto'}
 			{...props}
 		>

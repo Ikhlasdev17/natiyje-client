@@ -8,7 +8,6 @@ import {
 	Stack,
 	Text,
 } from '@chakra-ui/react'
-
 const HomeMidBanner = () => {
 	return (
 		<Box my={'40px'} py={'100px'} bg={'#fff'}>
@@ -17,6 +16,7 @@ const HomeMidBanner = () => {
 					base: '90%',
 					md: '70%',
 				}}
+				maxW={'1440px'}
 				mx={'auto'}
 			>
 				<Flex
@@ -34,21 +34,26 @@ const HomeMidBanner = () => {
 							mb={'30px'}
 							fontWeight={'500'}
 						>
-							Natiyje platformasi sizge usinis etedi!
+							Nátiyje platforması sizge usınıs etedi!
 						</Heading>
-						<Box color={'lightTextColor'} fontSize={'24px'} mb={'30px'}>
-							87% of people learning for professional development report career
-							benefits like getting a promotion, a raise, or starting a new
-							career
+						<Box color={'lightTextColor'} fontSize={'18px'} mb={'30px'}>
+							Qaraqalpaqstandaǵı eń birinshi onlayn hám gibrid oqıw
+							platformasında siz frontend, backend, android, dizayn hám taǵı
+							basqa tarawlardı tájriybeli mentorlar tárepinen jazılǵan sapalı
+							kurslar arqalı úyreniwińiz múmkin.
 						</Box>
 						<Stack>
 							<HStack mb={'20px'}>
 								<Image src={'./check.svg'} width={30} height={30} alt='' />
-								<Box color={'textColor'}>Top instructors from around world</Box>
+								<Box color={'textColor'}>Arzan baxa.</Box>
 							</HStack>
 							<HStack mb={'20px'}>
 								<Image src={'./check.svg'} width={30} height={30} alt='' />
-								<Text color={'textColor'}>Top courses for your team.</Text>
+								<Text color={'textColor'}>Individual mentor kómegi.</Text>
+							</HStack>
+							<HStack mb={'20px'}>
+								<Image src={'./check.svg'} width={30} height={30} alt='' />
+								<Text color={'textColor'}>Sertifikat.</Text>
 							</HStack>
 						</Stack>
 						<Box>

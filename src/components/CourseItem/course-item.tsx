@@ -90,7 +90,9 @@ const CourseItem: FC<CourseItemProps> = ({ course }) => {
 							rounded={'md'}
 							bg={'green.50'}
 						>
-							{course?.price?.toLocaleString()} sum
+							{course?.price
+								? course?.price?.toLocaleString() + ' sum'
+								: 'Biypul'}
 						</Text>
 					</HStack>
 				</Flex>
