@@ -70,6 +70,7 @@ const Header = ({ colorScheme, color, pos }: HeaderProps) => {
 					base: '90%',
 					md: '80%',
 				}}
+				maxW={'1440px'}
 			>
 				<Flex
 					alignItems={'center'}

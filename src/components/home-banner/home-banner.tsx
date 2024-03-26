@@ -1,13 +1,15 @@
+import { useAuth } from '@/hooks/useAuth'
 import { Box, Button, Flex, Heading, Image, Text } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import HomeBannerCards from './home-banner-card'
 const HomeBanner = () => {
 	const router = useRouter()
+	const auth = useAuth()
 	return (
 		<Box
 			minH={{
-				base: '730px',
-				md: '630px',
+				base: '430px',
+				md: '430px',
 			}}
 			w={'full'}
 			pos='relative'
@@ -41,19 +43,16 @@ const HomeBanner = () => {
 				<Heading
 					display={'flex'}
 					fontSize={{
-						base: '40px',
-						md: '50px',
+						base: '30px',
+						md: '40px',
 					}}
 					color={'white'}
 					textShadow={'lg'}
 					mt={10}
 				>
-					Natiyje.uz - Siz kutkennende joqari natiyje ushin!
+					Nátiyje.uz - Siz kútkennende joqarı nátiyje ushın!
 				</Heading>
-				<Text textShadow={'lg'} color={'white'} my={6} fontSize={'24px'}>
-					Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus
-					deserunt voluptas ut enim consectetur.
-				</Text>
+				<Text textShadow={'lg'} color={'white'} my={6} fontSize={'24px'}></Text>
 				<Flex gap={4} justifyContent={'center'}>
 					<Button
 						px={6}
@@ -67,18 +66,31 @@ const HomeBanner = () => {
 						color={'white'}
 						onClick={() => router.push('/courses')}
 					>
-						Kurslarimiz
+						Kurslarımız
 					</Button>
-					<Button
-						px={6}
-						h={12}
-						display={'inline-block'}
-						variant={'solid'}
-						colorScheme='brand'
-						onClick={() => router.push('/register')}
-					>
-						Dizimnen otiw
-					</Button>
+					{auth.user ? (
+						<Button
+							px={6}
+							h={12}
+							display={'inline-block'}
+							variant={'solid'}
+							colorScheme='brand'
+							onClick={() => router.push('/enrolled-courses')}
+						>
+							Sabaqlardı dawam etiw
+						</Button>
+					) : (
+						<Button
+							px={6}
+							h={12}
+							display={'inline-block'}
+							variant={'solid'}
+							colorScheme='brand'
+							onClick={() => router.push('/register')}
+						>
+							Dizimnen otiw
+						</Button>
+					)}
 				</Flex>
 				<HomeBannerCards />
 			</Box>

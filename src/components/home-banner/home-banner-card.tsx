@@ -6,13 +6,14 @@ const HomeBannerCards = () => {
 			shadow={'lg'}
 			bg={'white'}
 			p={'33px'}
+			py={'20px'}
 			zIndex={1}
 			pos={'absolute'}
 			bottom={{
 				base: '-350px',
 				md: '-70px',
 			}}
-			minH={'140px'}
+			minH={'100px'}
 			left={'50%'}
 			transform={'translateX(-50%)'}
 			gap={14}
@@ -33,17 +34,18 @@ const HomeBannerCards = () => {
 				base: 'column',
 				md: 'row',
 			}}
+			rounded={'md'}
 		>
 			<HStack minW={'200px'} gap={3}>
-				<Image alt='' src='./home-icon1.svg' width={74} height={74} />
-				<Text fontSize={'lg'}>10+ online kurslar</Text>
+				<Image alt='' src='./home-icon1.svg' width={54} height={54} />
+				<Text fontSize={'lg'}>Kúshli ortalıq</Text>
 			</HStack>
 			<HStack minW={'200px'} gap={3}>
-				<Image alt='' src='./home-icon2.svg' width={74} height={74} />
-				<Text fontSize={'lg'}>Siz qalegen waqit</Text>
+				<Image alt='' src='./home-icon2.svg' width={54} height={54} />
+				<Text fontSize={'lg'}>Qısqa waqıtta</Text>
 			</HStack>
 			<HStack minW={'200px'} gap={3}>
-				<Image alt='' src='./home-icon3.svg' width={74} height={74} />
+				<Image alt='' src='./home-icon3.svg' width={54} height={54} />
 				<Text fontSize={'lg'}>Kushli bilim</Text>
 			</HStack>
 		</Flex>

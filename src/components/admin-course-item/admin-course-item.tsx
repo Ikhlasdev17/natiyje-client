@@ -83,7 +83,9 @@ const AdminCourseItem = ({ course }: { course: CourseType }) => {
 				<Heading fontSize={'22px'} mt={4}>
 					{course.title}
 				</Heading>
-				<Text mb={4}>{course.price?.toLocaleString()} sum</Text>
+				<Text mb={4}>
+					{course?.price ? course?.price?.toLocaleString() + ' sum' : 'Biypul'}
+				</Text>
 				<Divider mb={4} />
 				<HStack>
 					<Button

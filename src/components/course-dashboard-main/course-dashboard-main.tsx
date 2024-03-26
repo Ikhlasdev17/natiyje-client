@@ -22,14 +22,24 @@ const CourseDashboardMain = () => {
 				p={2}
 				bg={'white'}
 				rounded={'md'}
-				minH={'400px'}
+				minH={{
+					base: '250px',
+					md: '400px',
+				}}
 				overflow={'hidden'}
 			>
 				<Box
 					as='iframe'
-					src={lesson?.embedVideo}
+					src={
+						lesson?.embedVideo?.includes('youtu.be')
+							? lesson?.embedVideo.replace('youtu.be', 'youtube.com/embed')
+							: lesson?.embedVideo
+					}
 					w={'full'}
-					h={'400px'}
+					h={{
+						base: '250px',
+						md: '400px',
+					}}
 					display={'flex'}
 					justifyContent={'center'}
 					alignItems={'center'}

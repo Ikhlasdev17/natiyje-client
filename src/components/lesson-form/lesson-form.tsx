@@ -109,11 +109,7 @@ const LessonForm = ({ onComplete, data }: LessonFormPropsType) => {
 									value={draftVideoUrl}
 									onChange={e => setDraftVideoUrl(e.target.value)}
 								/>
-								<Button
-									isDisabled
-									h={14}
-									onClick={() => setVideoUrl(draftVideoUrl)}
-								>
+								<Button h={14} onClick={() => setVideoUrl(draftVideoUrl)}>
 									Change url
 								</Button>
 							</Flex>

@@ -138,13 +138,19 @@ const CourseDetailCard = () => {
 			/>
 
 			<Heading color={'textColor'} fontSize={'30px'} my={4} fontWeight={'500'}>
-				{course?.price?.toLocaleString()} sum
+				{course?.price ? course?.price?.toLocaleString() + ' sum' : 'Biypul'}
 			</Heading>
 
 			{user ? (
 				user?.courses?.findIndex(item => item._id === course?._id) === -1 ? (
 					<Button onClick={enroll} colorScheme='green' w={'full'} h={12}>
-						Hazir satip aliw
+						{
+							course?.price ? (
+								"Hazir satip alıw"
+							) : (
+								"Kursqa qosılıw"
+							)
+						}
 					</Button>
 				) : (
 					<Button
